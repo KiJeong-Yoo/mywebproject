@@ -1,9 +1,7 @@
 package member.dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -14,7 +12,6 @@ import member.vo.MemberVo;
 @Repository
 public class MemberDao implements MemberInter {
 	
-	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	@Autowired
@@ -26,7 +23,7 @@ public class MemberDao implements MemberInter {
 	
 	// 로그인 처리
 	public String login(String id, String pw) {
-		String sql = "select * from login where id=? and password=?";
+		String sql = "select * from member where id=? and password=?";
 		try {
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -49,7 +46,7 @@ public class MemberDao implements MemberInter {
 	public MemberVo infoSelect(String id) { // id를 통한 정보 찾기 함수
 		
 		MemberVo vo = new MemberVo();
-		String sql = "select * from login where id=?";
+		String sql = "select * from member where id=?";
 		try {
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setString(1, id);		
@@ -75,7 +72,7 @@ public class MemberDao implements MemberInter {
 		String sql = "";
 		int result = 0;
 		try {
-			sql = "select id from login where id=?";
+			sql = "select id from member where id=?";
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -102,7 +99,7 @@ public class MemberDao implements MemberInter {
 		try {
 				if(result == 0) {
 					System.out.println("if test");
-					sql = "insert into login values(?,?,?,?,?,?)";
+					sql = "insert into member values(?,?,?,?,?,?)";
 					pstmt = ds.getConnection().prepareStatement(sql);
 					pstmt.setString(1, loginvo.getId());
 					pstmt.setString(2, loginvo.getPw());
@@ -125,7 +122,7 @@ public class MemberDao implements MemberInter {
 	// 아이디 찾기
 	public MemberVo findInfo(String name, String ssn, String email) {
 		MemberVo loginvo = new MemberVo();
-		String sql = "select id from login where name=? and ssn=? and email=?";
+		String sql = "select id from member where name=? and ssn=? and email=?";
 		try {
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setString(1, name);
@@ -153,7 +150,7 @@ public class MemberDao implements MemberInter {
 		int pwCheck = pwCheck(id, pw);
 		int result = 0;
 		if(pwCheck == 1) {
-			String sql = "update login set name=?, ssn=?, hp=?, email=? where id=?";
+			String sql = "update member set name=?, ssn=?, hp=?, email=? where id=?";
 			try {
 				pstmt = ds.getConnection().prepareStatement(sql);
 				pstmt.setString(1, name);
@@ -176,7 +173,7 @@ public class MemberDao implements MemberInter {
 	}
 
 	private int pwCheck(String id, String pw) {
-		String sql = "select * from login where id=? and password=?";
+		String sql = "select * from member where id=? and password=?";
 		try {
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -198,7 +195,7 @@ public class MemberDao implements MemberInter {
 	@Override
 	public int memberDelete(String deleteId, String deletePw) {
 		int result = 0;
-		String sql = "delete from login where id=? and password=?";
+		String sql = "delete from member where id=? and password=?";
 		try {
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setString(1, deleteId);

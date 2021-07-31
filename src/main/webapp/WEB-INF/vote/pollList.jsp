@@ -15,7 +15,7 @@
 					</tr>
 					<tr>
 						<td style="text-align:left;" colspan="2">
-							<c:forEach var="item" items="${ilist }">
+							<c:forEach var="item" items="${ilist}">
 								<c:choose>
 									<c:when test="${plvo.type == 1}">
 										<input type="checkbox" name="itemnum" value="${status.index+1}">
@@ -39,7 +39,7 @@
 						</td>
 						<td width="150">
 							<input type="button" value="결과" 
-							onclick="javascript:window.open('pollView.jsp?num=${voteCount}'
+							onclick="javascript:window.open('/vote/pollview?num=${voteCount}'
 							,'pollView','width=650, height=550')">
 						</td>
 					</tr>

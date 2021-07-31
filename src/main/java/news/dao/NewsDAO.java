@@ -28,7 +28,7 @@ public class NewsDAO implements NewsInter {
 		
 		int result = 0;
 		try {
-			sql = "insert into news values(news_id_seq.nextval, ?, ?, ?, ?, ?, ?, 0)";
+			sql = "insert into news values((select nvl(max(id), 0) + 1 from news), ?, ?, ?, ?, ?, ?, 0)";
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setString(1, news.getAddress());
 			pstmt.setString(2, news.getTitle());

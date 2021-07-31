@@ -56,7 +56,7 @@ public class CommentController {
 		return mv;
 	}
 	
-	@RequestMapping("clist")
+	@RequestMapping("/clist")
 	public ModelAndView list(String requestPage, String pidx) {
 		ModelAndView mv = new ModelAndView();
 		BoardVO board = null;
@@ -78,7 +78,7 @@ public class CommentController {
 		return mv;
 	}
 	
-	@RequestMapping("creply")
+	@RequestMapping("/creply")
 	public ModelAndView creply(String requestPage, String commentreply, String commentidx, String pidx, String groupid, String depth, String reOrder, String writeid) {
 		ModelAndView mv = new ModelAndView();
 		BoardVO board = null;
@@ -116,7 +116,7 @@ public class CommentController {
 		return mv;
 	}
 	
-	@RequestMapping("cdelete")
+	@RequestMapping("/cdelete")
 	public ModelAndView delete(String requestPage, String groupid, String pidx, String reorder) {
 		ModelAndView mv = new ModelAndView();
 		BoardVO board = null;
@@ -136,7 +136,7 @@ public class CommentController {
 		return mv;
 	}
 	
-	@RequestMapping("cupdate")
+	@RequestMapping("/cupdate")
 	public ModelAndView update(String requestPage, String groupid, String pidx, String reorder) {
 		ModelAndView mv = new ModelAndView();
 		BoardVO board = null;

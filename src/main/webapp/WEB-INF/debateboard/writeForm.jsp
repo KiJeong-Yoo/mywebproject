@@ -19,14 +19,7 @@ function dataCheck(){
 <body>
 <div class="container">
   <h2><button class="btn" onclick="location.href='/index'"><i class="fa fa-home"></i></button>글작성</h2>
-  <form name=form action="/debateboard/insert.do" method=post>
-  
-    <select name="boardid">
-    	<option value="1">토론 게시판</option>
-    	<option value="2">자유 게시판</option>
-    	<option value="3">포토 게시판</option>
-    </select>
-    
+  <form name=form action="/debateboard/insert.do" method=post>    
     <div class="form-group">
       <label for="title">제목</label>
       <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력 하세요">

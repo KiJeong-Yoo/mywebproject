@@ -61,18 +61,18 @@ public class VoteController {
 //		pivo.setItem(item);
 		boolean result = voteService.insertPoll(plvo, pivo);
 				
-		String msg = "설문추가에 실패하였습니다.";
+		//String msg = "설문추가에 실패하였습니다.";
 		String url = "/vote/pollInsert.jsp";
 		
 		if(result) {
-			msg = "설문 성공하였습니다.";
+			//msg = "설문 성공하였습니다.";
 			url = "/vote/pollList.jsp";
 			Vector<PollListVo> vlist = voteService.getAllList();
 			
 			mv.addObject("section", url);
-			mv.addObject("list", vlist);
+			mv.addObject("alllist", vlist);
 		} else {
-			mv.addObject("", url);
+			mv.addObject("section", url);
 		}
 		
 		mv.setViewName("/WEB-INF/index.jsp");
@@ -110,5 +110,6 @@ public class VoteController {
 		 
 		return mv;
 	}
+	
 	
 }

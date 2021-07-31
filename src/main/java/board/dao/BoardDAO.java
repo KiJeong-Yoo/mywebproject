@@ -28,7 +28,9 @@ public class BoardDAO implements DebateInter, FreeInter {
 		int result = 0;
 		String sql = null;
 		try {
-			sql="insert into board values(?, board_idx_seq.nextval, ?, ?, 0, board_groupid_seq.nextval, 0, 0, 0, ?, ?, sysdate)";
+//			sql="insert into board values(?, board_idx_seq.nextval, ?, ?, 0, board_groupid_seq.nextval, 0, 0, 0, ?, ?, sysdate)";
+//			sql="insert into board values(?, (select nvl(max(idx), 0) + 1 from board), ?, ?, 0, (select nvl(max(groupid), 0) + 1 from board), 0, 0, 0, ?, ?, sysdate)";
+			sql="insert into board values(?, (select nvl(max(idx), 0) + 1 from board), ?, ?, 0, b_groupid_seq.nextval, 0, 0, 0, ?, ?, sysdate)";
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, board.getBoardid());
 			pstmt.setString(2, board.getTitle());
@@ -102,7 +104,7 @@ public class BoardDAO implements DebateInter, FreeInter {
 		if(endPage > totalPage) 
 			endPage = totalPage;		
 		
-		sql = "select idx, title, content, readcount, groupid, depth, re_order, isdel, write_id, write_name, write_day from (select rownum rnum, idx, title, content, readcount, groupid, depth, re_order, isdel, write_id, write_name, write_day from (select * from board a where boardid=? order by a.groupid desc, a.re_order asc, write_day desc) where rownum <= ?) where rnum >= ?"; 
+		sql = "select idx, title, content, readcount, groupid, depth, re_order, isdel, write_id, write_name, write_day from (select rownum rnum, idx, title, content, readcount, groupid, depth, re_order, isdel, write_id, write_name, write_day from (select * from board a where boardid=? order by a.groupid desc, a.re_order asc) where rownum <= ?) where rnum >= ?"; 
 		
 		pstmt = ds.getConnection().prepareStatement(sql);
 		pstmt.setInt(1, boardid);
@@ -206,18 +208,20 @@ public class BoardDAO implements DebateInter, FreeInter {
 		}
 		
 		// 같은 그룹 다른 댓글에 대해 depth 1 증가
+		System.out.println("replyinsert groupid : " + board.getGroupid());
 		reply_before_update(board.getGroupid(), board.getReOrder()-1);
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = null;
 		try {
-			sql = "insert into board values(?, board_idx_seq.nextval, ?, ?, 0, ?, ?, ?, 0, ?, ?, sysdate)";
+			sql = "insert into board values(?, (select nvl(max(idx), 0) + 1 from board), ?, ?, 0, ?, ?, ?, 0, ?, ?, sysdate)";
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, board.getBoardid());
 			pstmt.setString(2, board.getTitle());
 			pstmt.setString(3, board.getContent());
 			pstmt.setInt(4, board.getGroupid());
+			System.out.println("replyinsert groupid2 : " + board.getGroupid());
 			pstmt.setInt(5, board.getDepth());
 			pstmt.setInt(6, board.getReOrder());
 			pstmt.setString(7, board.getWriteId()); //id
@@ -225,10 +229,10 @@ public class BoardDAO implements DebateInter, FreeInter {
 			
 			result = pstmt.executeUpdate();
 			
-			if(result > 0)
-				System.out.println("sql 댓글 입력 성공");
-			else
-				System.out.println("sql 댓글 입력 실패");
+//			if(result > 0)
+//				System.out.println("sql 댓글 입력 성공");
+//			else
+//				System.out.println("sql 댓글 입력 실패");
 			
 		} catch(Exception e) { 
 			e.printStackTrace();

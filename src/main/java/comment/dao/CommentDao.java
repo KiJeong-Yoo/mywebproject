@@ -14,6 +14,7 @@ import comment.vo.CPageBoard;
 import comment.vo.CommentVo;
 
 
+
 @Repository
 public class CommentDao implements CommentInter {
 	
@@ -39,7 +40,7 @@ public class CommentDao implements CommentInter {
 		ResultSet rs = null;
 		try {
 		//1. 전체 게시물 수 구하기
-		sql = "select count(*) from cboard where pidx=?";
+		sql = "select count(*) from comment_board where pidx=?";
 		pstmt = ds.getConnection().prepareStatement(sql);
 		pstmt.setInt(1, pidx);
 		rs = pstmt.executeQuery();
@@ -71,7 +72,7 @@ public class CommentDao implements CommentInter {
 		if(endPage > totalPage) 
 			endPage = totalPage;		
 		
-		sql = "select idx, pidx, content, groupid, depth, re_order, isdel, write_id, write_day from (select rownum rnum, idx, pidx, content, groupid, depth, re_order, isdel, write_id, write_day from (select * from cboard a where pidx=? order by a.groupid asc, a.re_order asc) where rownum <= ?) where rnum >= ?"; 
+		sql = "select idx, pidx, content, groupid, depth, re_order, write_id, write_day from (select rownum rnum, idx, pidx, content, groupid, depth, re_order, write_id, write_day from (select * from comment_board a where pidx=? order by a.groupid asc, a.re_order asc) where rownum <= ?) where rnum >= ?"; 
 		
 		pstmt = ds.getConnection().prepareStatement(sql);		
 		pstmt.setInt(1, pidx); 
@@ -87,7 +88,6 @@ public class CommentDao implements CommentInter {
 			vo.setGroupid(rs.getInt("groupid"));
 			vo.setDepth(rs.getInt("depth"));
 			vo.setReOrder(rs.getInt("re_order"));
-			vo.setIsdel(rs.getInt("isdel"));
 			vo.setWriteid(rs.getString("write_id"));
 			vo.setWritedate(rs.getDate("write_day"));
 			list.add(vo);
@@ -101,17 +101,17 @@ public class CommentDao implements CommentInter {
 		return CPageBoard;
 	}
 	
-	public int insert(CommentVo comment) { // 댓글 입력
+	public int insert(CommentVo comment_board) { // 댓글 입력
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = null;
 
 		try {
-			sql="insert into cboard values(cboard_idx_seq.nextval, ?, ?, cboard_groupid_seq.nextval, 0, 0, 0, ?, sysdate)";
+			sql="insert into comment_board values((select nvl(max(idx), 0) + 1 from comment_board), ?, ?, (select nvl(max(groupid), 0) + 1 from comment_board), 0, 0, ?, sysdate)";
 			pstmt = ds.getConnection().prepareStatement(sql);
-			pstmt.setInt(1, comment.getPidx());
-			pstmt.setString(2, comment.getContent());
-			pstmt.setString(3, comment.getWriteid());			
+			pstmt.setInt(1, comment_board.getPidx());
+			pstmt.setString(2, comment_board.getContent());
+			pstmt.setString(3, comment_board.getWriteid());			
 			result = pstmt.executeUpdate();
 			
 			if(result > 0) {
@@ -127,7 +127,7 @@ public class CommentDao implements CommentInter {
 	
 	public int delete(int idx) { // 댓글 삭제
 		int result = 0;
-		String sql = "delete from cboard where idx=?";
+		String sql = "delete from comment_board where idx=?";
 		PreparedStatement pstmt = null;
 		
 		try{
@@ -142,7 +142,7 @@ public class CommentDao implements CommentInter {
 	
 	public int update(int idx, String content) { // 댓글 수정
 		int result = 0;
-		String sql = "update cboard set content=? where idx=?";
+		String sql = "update comment_board set content=? where idx=?";
 		PreparedStatement pstmt=null;
 		try{
 			pstmt = ds.getConnection().prepareStatement(sql);
@@ -155,29 +155,29 @@ public class CommentDao implements CommentInter {
 			return result;
 	}
 	
-	public int replyInsert(CommentVo comment) {
+	public int replyInsert(CommentVo comment_board) {
 		// 부모글 존재 여부 확인
-		System.out.println(comment.getCommentidx());
-		if(!parentCheck(comment.getCommentidx())) {
+		System.out.println(comment_board.getCommentidx());
+		if(!parentCheck(comment_board.getCommentidx())) {
 			System.out.println("부모글 확인 실패");
 			return 0;
 		}
 		
 		// 같은 그룹 다른 댓글에 대해 depth 1 증가
-		reply_before_update(comment.getGroupid(), comment.getReOrder()-1);
+		reply_before_update(comment_board.getGroupid(), comment_board.getReOrder()-1);
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = null;
 		try {
-			sql = "insert into cboard values(cboard_idx_seq.nextval, ?, ?, ?, ?, ?, 0, ?, sysdate)";
+			sql = "insert into comment_board values((select nvl(max(idx), 0) + 1 from comment_board), ?, ?, ?, ?, ?, ?, sysdate)";
 			pstmt = ds.getConnection().prepareStatement(sql);
-			pstmt.setInt(1, comment.getPidx());
-			pstmt.setString(2, comment.getContent());
-			pstmt.setInt(3, comment.getGroupid());
-			pstmt.setInt(4, comment.getDepth());
-			pstmt.setInt(5, comment.getReOrder());
-			pstmt.setString(6, comment.getWriteid()); //id
+			pstmt.setInt(1, comment_board.getPidx());
+			pstmt.setString(2, comment_board.getContent());
+			pstmt.setInt(3, comment_board.getGroupid());
+			pstmt.setInt(4, comment_board.getDepth());
+			pstmt.setInt(5, comment_board.getReOrder());
+			pstmt.setString(6, comment_board.getWriteid()); //id
 			
 			result = pstmt.executeUpdate();
 			
@@ -196,8 +196,8 @@ public class CommentDao implements CommentInter {
 	public boolean parentCheck(int idx) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int result = 0;
-		String sql = "select * from cboard where idx=?";
+
+		String sql = "select * from comment_board where idx=?";
 		try {
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, idx);
@@ -217,7 +217,7 @@ public class CommentDao implements CommentInter {
 	public void reply_before_update(int groupid, int reOrder) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = "update cboard set re_order=re_order+1 where groupid=? and re_order>?";
+		String sql = "update comment_board set re_order=re_order+1 where groupid=? and re_order>?";
 		try {
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, groupid);
@@ -236,9 +236,8 @@ public class CommentDao implements CommentInter {
 		List<CommentVo> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int result = 0;
 		
-		String sql = "select * from cboard where pidx=?";
+		String sql = "select * from comment_board where pidx=?";
 		try {
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, pidx);
@@ -252,7 +251,6 @@ public class CommentDao implements CommentInter {
 				vo.setGroupid(rs.getInt("groupid"));
 				vo.setDepth(rs.getInt("depth"));
 				vo.setReOrder(rs.getInt("re_order"));
-				vo.setIsdel(rs.getInt("isdel"));
 				vo.setWriteid(rs.getString("write_id"));
 				vo.setWritedate(rs.getDate("write_day"));
 				list.add(vo);
@@ -263,14 +261,14 @@ public class CommentDao implements CommentInter {
 		return list;
 	}
 
-	@Override
+
 	public int delete(int groupid, int reorder) {
 		PreparedStatement pstmt = null;
 		String sql = null;
 		int result = 0;
 		
 		if(groupid == 0) {
-			sql = "delete from cboard where groupid=?";
+			sql = "delete from comment_board where groupid=?";
 			try {
 				pstmt = ds.getConnection().prepareStatement(sql);
 				pstmt.setInt(1, groupid);
@@ -280,7 +278,7 @@ public class CommentDao implements CommentInter {
 				e.printStackTrace();
 			}
 		} else {
-			sql = "delete from cboard where groupid=? and re_order=?";
+			sql = "delete from comment_board where groupid=? and re_order=?";
 			try {
 				pstmt = ds.getConnection().prepareStatement(sql);
 				pstmt.setInt(1, groupid);

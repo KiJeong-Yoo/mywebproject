@@ -28,7 +28,7 @@ public class PollMgr implements PollInter {
 		boolean flag = false;
 		
 		try {
-			sql = "insert into tblPollList(num, question, sdate, edate, wdate, type) values(list_num_seq.nextval, ?, ?, ?, sysdate, ?)";
+			sql = "insert into tblPolllist(num, question, sdate, edate, wdate, type) values((select nvl(max(num), 0) + 1 from tblpolllist), ?, ?, ?, sysdate, ?)";
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setString(1, plVo.getQuestion());
 			pstmt.setString(2, plVo.getSdate());

@@ -196,6 +196,7 @@ public class FreeController {
 	   		board.setBoardid(boardid);
 	   		board.setIdx(Integer.parseInt(idx));
 	   		board.setGroupid(Integer.parseInt(groupid));
+	   		System.out.println("reply groudid : " + groupid);
 	   		board.setDepth(Integer.parseInt(depth));
 	   		board.setReOrder(Integer.parseInt(reOrder));
 	   		board.setTitle(title);
@@ -217,6 +218,7 @@ public class FreeController {
    		board.setBoardid(boardid);
    		board.setIdx(Integer.parseInt(parent_idx));
    		board.setGroupid(Integer.parseInt(groupid));
+   		System.out.println("replydo groudid : " + groupid);
    		board.setDepth(Integer.parseInt(depth) + 1);
    		board.setReOrder(Integer.parseInt(reOrder) + 1);
    		board.setTitle(title);

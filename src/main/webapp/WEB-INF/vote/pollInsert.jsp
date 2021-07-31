@@ -66,11 +66,6 @@
 					font-size:18; text-align: center; "rowspan="30" >
 					<b>항목</b></td>
 				</tr>
-				<tr>
-					<td colspan=3>
-                         
-					</td>
-				</tr>
 			</table>
 			<div style="display:flex; width: 500px; margin: 10px; padding: 10px; justify-content: center;">
 				<input type="button" value="항목 추가" onclick="addRow()">
@@ -120,12 +115,11 @@
 		  newCell1.innerText = '*';
 		  newCell2.appendChild(input);
 		  count++;
-		  console.log(count);
+
 	}
 	
 	function deleteRow(rownum) {
 		  // table element 찾기
-		  console.log(count);
 		  
 		  if(!(count < 1)) {
 			  const table = document.getElementById('table');		  
