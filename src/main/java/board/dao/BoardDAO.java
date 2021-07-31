@@ -170,20 +170,46 @@ public class BoardDAO implements DebateInter, FreeInter {
 	
 	public int delete(int idx, int boardid) {
 		int result = 0;
-		String sql = "delete from board where idx=? and boardid=?";
+		int commentResult = commentDelete(idx);
+		
+		if(commentResult == 1) {			
+			String sql = "delete from board where idx=? and boardid=?";
+			PreparedStatement pstmt = null;
+			
+			try{
+				pstmt = ds.getConnection().prepareStatement(sql);
+				pstmt.setInt(1, idx);
+				pstmt.setInt(2, boardid);
+				result=pstmt.executeUpdate();
+			} catch(Exception e) { 
+				e.printStackTrace();
+			}
+		} else {
+			
+		}
+		return result;
+	}
+	
+	private int commentDelete(int idx) {
+		int result = 0;
+		
+		String sql = "delete from comment_board where pidx=?";
 		PreparedStatement pstmt = null;
 		
 		try{
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, idx);
-			pstmt.setInt(2, boardid);
-			result=pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 		} catch(Exception e) { 
 			e.printStackTrace();
+			System.out.println("댓글 없음.");
+			return 1;
 		}
+
 		return result;
+		
 	}
-	
+
 	public int update(int idx, String title, String content) {
 		int result = 0;
 		String sql = "update board set title=?,content=? where idx=?";

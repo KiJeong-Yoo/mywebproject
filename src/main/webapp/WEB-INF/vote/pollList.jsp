@@ -7,7 +7,7 @@
 		
 		<b style="font-family:d2coding; font-size:15pt;">
 		<span style="color: red;">HOT</span> VOTE THIS WEEK</b><br/>
-		<form action="/vote/pollFormProc">
+		<form action="/vote/pollFormProc" onsubmit="return check()">
 				<table border="1">
 					<tr>
 						<td colspan="2" width="300">Q : ${plvo.question} 
@@ -40,7 +40,7 @@
 						<td width="150">
 							<input type="button" value="결과" 
 							onclick="javascript:window.open('/vote/pollview?num=${voteCount}'
-							,'pollView','width=650, height=550')">
+							,'pollview','width=650, height=550')">
 						</td>
 					</tr>
 				</table>
@@ -78,3 +78,9 @@
 		</table>
 	</div>
 </section>
+<script>
+var ch = document.getElement
+
+var check = test1.getAttribute("checked")
+
+</script>

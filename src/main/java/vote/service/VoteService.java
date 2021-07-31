@@ -37,6 +37,14 @@ public class VoteService {
 	public boolean updatePoll(int count, String[] itemnum) {
 		return poll.updatePoll(count, itemnum);
 	}
-	
+
+	public Vector<PollItemVo> getView(int view_num) {
+		return poll.getView(view_num);
+	}
+
+	public int getMaxcount(int view_num) {
+		return poll.getMaxcount(view_num);
+	}
+
 	
 }

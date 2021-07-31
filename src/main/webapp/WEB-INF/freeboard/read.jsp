@@ -117,18 +117,18 @@ $(function() {
 		
 		let id = $(this).attr('id');
 		
-		$('.comment_reply_div_' + id).css('display', '' );
-		
-/* 		
-		if($('.comment_reply_div').css('display') == "none") {
-			$('.comment_reply_div').show();
-			console.log($('.on').index());
-		}
-		else if($('.comment_reply_div').css('display') != "none") {
-			$('.comment_reply_div').hide();
-		}
-		 */
-		 
+		$('.comment_reply_div_' + id).css('display', '' );		 
 	})
 });
 </script>
+<c:if test="${id eq 'x'}">
+	<script>
+		alert("글쓴이만 수정이 가능 합니다.");
+	</script>
+</c:if>
+
+<c:if test="${id eq 'xx'}">
+	<script>
+		alert("글쓴이만 삭제가 가능 합니다.");
+	</script>
+</c:if>

@@ -19,4 +19,8 @@ public interface PollInter {
 
 	boolean updatePoll(int count, String[] itemnum);
 
+	Vector<PollItemVo> getView(int view_num);
+
+	int getMaxcount(int view_num);
+
 }

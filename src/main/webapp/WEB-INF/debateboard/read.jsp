@@ -21,67 +21,98 @@
 		<button onclick="location.href='/debateboard/update?idx=${board.idx}&requestPage=${requestPage}&writeid=${board.writeName}'">글 수정</button>
 		<button onclick="location.href='/debateboard/delete?idx=${board.idx}&requestPage=${requestPage}&writeid=${board.writeName}'">글 삭제</button>
     </div>
-	<div class="comment_con">
-		<table>
-		    <c:if test="${requestScope.commentList != null}">
-		    	<c:forEach var="comment" items="${requestScope.commentList}">
-				    <tr>
-				    <!-- id, date -->
-				    	<td width="150">
-				   			<div>
-				   				${comment.comment_id}<br>
-				   				<font size="2" color="lightgray">${comment.comment_date}</font>
-				   			</div>
-				   		</td>
-				   		<!-- content -->
-				   		<td width="550">
-				   			<div class="comment_text_wrapper">
-				   				${comment.comment_content}
-				   			</div>
-				   		</td>
-				   		<!-- button -->
-				   		<td width="100">
-				   			<div id="comment_btn" style="text-align:center;">
-				   				<a href="#">답변</a><br>
-				   				<c:if test="${comment.comment_id == ${id}">
-				   					<a href="#">수정</a><br>
-				   					<a href="#">삭제</a>
-				   				</c:if>
-				   			</div>	
-				   		</td>
-				   	</tr>
-			    </c:forEach>
-			</c:if>
-			<!-- 로그인 여부 -->
-			<c:if test="${id != null}">
-				<tr bgcolor="#F5F5F5">
-					<form id="writeCommentForm">
-						<input type="hidden" name="comment_board" value="${board.idx}">
-						<input type="hidden" name="comment_id" value="${id}">
-						<!-- id -->
-						<td width="150">
-							<div>
-								${id}
-							</div>
-						</td>
-						<!-- content -->
-						<td width="550">
-							<div>
-								<textarea name="comment_content" rows="4" cols="70"></textarea>
-							</div>
-						</td>
-						<!-- comment btn -->
-						<td width="100">
-							<div id="comment_btn" style="text-align:center;">
-								<p><a href="#" onclick="writeCmt()">댓글등록</a></p>
-							</div>
-						</td>
-					</form>
+	<!-- comment -->
+    <div class="comment_table">
+	 	<table class="table">
+			<tr class="success">
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>내용</th>
+			</tr>
+			<c:forEach var="clist" items="${cboard.list}" varStatus="status">
+				<tr>
+					<td>
+						<c:if test="${clist.depth > 0}">
+							<c:forEach begin="1" end="${clist.depth}">&nbsp;&nbsp;&nbsp;</c:forEach>
+							<img style="width:42px;height:15px" src="/img/reply_icon.gif"/>
+						</c:if>
+					</td>
+					<td>${clist.writeid}</td>
+					<td>${clist.writedate}</td>
+					<td>${clist.content}</td>
+					<td><a id="${status.index}" class="on">답글쓰기</a></td>
 				</tr>
-			</c:if>
+				<tr>
+					<td id="${status.index}" class="comment_reply_div_${status.index}" style="display: none;">
+						<div>
+							<form action="/comment/creply" method="post" onsubmit="return check2()">
+								<input type="text" name="commentreply">
+								<input type="hidden" name="commentidx" value="${clist.commentidx}">
+								<input type="hidden" name="pidx" value="${board.idx}">
+								<input type="hidden" name="groupid" value="${clist.groupid}">
+								<input type="hidden" name="depth" value="${clist.depth}">
+								<input type="hidden" name="reOrder" value="${clist.reOrder}">
+								<input type="hidden" name="writeid" value="${clist.writeid}">								
+								<input type="hidden" name="requestPage" value="${requestPage}">								
+								<input type="submit" value="입력">
+							</form>
+						</div>
+					</td>
+					<td><button onclick="location.href='/comment/cupdate?idx=${clist.commentidx}&requestPage=${requestPage}&pidx=${board.idx}'">댓글 수정</button></td>
+					<td><button onclick="location.href='/comment/cdelete?requestPage=${requestPage}&groupid=${clist.groupid}&pidx=${board.idx}&reorder=${clist.reOrder}'">댓글 삭제</button></td>
+				</tr>
+			</c:forEach>
+			<!-- page list -->
+			<tr>
+				<td colspan=4 align=center valign="center">
+					<ul class="pagination">			   
+					    <c:if test="${cboard.beginPage > 5}">
+					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${cboard.beginPage - 5}&pidx=${board.idx}">이전페이지</a></li>
+					    </c:if>
+					 
+					    <c:forEach var="i" begin="${cboard.beginPage}" end="${cboard.endPage}">
+					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${i}&pidx=${board.idx}">${i}</a></li>
+					    </c:forEach>
+					   
+					    <c:if test="${cboard.totalPage ne cboard.endPage}">
+					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${cboard.endPage + 1}&pidx=${board.idx}">다음페이지</a></li>
+					    </c:if>			    
+					</ul>
+				</td>
+			</tr>
+			<!-- end page list -->
 		</table>
 	</div>
 </div>
+<script>
+let content = document.getElementById("c_content");
+let creply = document.getElementsByName("commentreply");
+
+function check() {
+	if(content.value == '') {
+		alert("댓글을 입력해주세요.");
+		return false;
+	}
+	return true;
+}
+
+function check2() {
+	if(creply.value == '') {
+		alert("댓글을 입력해주세요.");
+		return false;
+	}
+	return true;
+}
+
+$(function() {
+	$('.on').click(function() {
+		
+		let id = $(this).attr('id');
+		
+		$('.comment_reply_div_' + id).css('display', '' );		 
+	})
+});
+</script>
 <c:if test="${id eq 'x'}">
 	<script>
 		alert("글쓴이만 수정이 가능 합니다.");

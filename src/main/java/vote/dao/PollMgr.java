@@ -164,12 +164,6 @@ public class PollMgr implements PollInter {
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				pstmt = ds.getConnection().prepareStatement(sql);
-			} catch (SQLException e) {				
-				e.printStackTrace();
-			}
 		}
 		return flag;
 	}
@@ -257,7 +251,7 @@ public class PollMgr implements PollInter {
 			
 			sql = "select item, count from tblPollItem where listNum=?";
 			pstmt = ds.getConnection().prepareStatement(sql);
-			/* if(listNum==0) listNum=getMaxNum(); */
+						
 			pstmt.setInt(1, listNum==0?getMaxNum():listNum);//if 로직을 3항연산자로 리턴(ㅇㅇ?는 0이면 getMaxNum, 0이 아니면 listNum이다.
 			rs = pstmt.executeQuery();
 			while(rs.next()) {

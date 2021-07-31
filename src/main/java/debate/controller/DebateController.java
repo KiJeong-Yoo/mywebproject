@@ -1,5 +1,8 @@
 package debate.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import board.vo.BoardVO;
 import board.vo.PageBoard;
+import comment.service.CommentService;
+import comment.vo.CPageBoard;
+import comment.vo.CommentVo;
 import debate.service.DebateService;
 
 @Controller
@@ -17,6 +23,9 @@ import debate.service.DebateService;
 public class DebateController {
 	@Autowired
 	DebateService debateService;
+	@Autowired
+	CommentService commentService;
+	
 	int boardid = 1;
 	int request_Page = 1;
 	String _requestPage = "";
@@ -45,14 +54,22 @@ public class DebateController {
 		request_Page = Integer.parseInt(requestPage);
 		BoardVO board = null;
 		
-		int result = debateService.readcountUpdate(Integer.parseInt(idx));
+		CPageBoard commentlist = null;
+		List<CommentVo> list = new ArrayList<>();
+		int pidx = Integer.parseInt(idx);
 		
-		if(result == 1)
-			board = debateService.select(Integer.parseInt(idx), boardid);
-		
+		int result = debateService.readcountUpdate(pidx);
+		if(result == 1) {
+			board = debateService.select(pidx, boardid);
+			list = commentService.clist(pidx);
+			commentlist = commentService.list(request_Page, pidx); // 댓글
+		}		
+
 		mv.addObject("board", board);
+		mv.addObject("comlist", list);
+		mv.addObject("cboard", commentlist);
 		mv.addObject("requestPage", request_Page);
-		mv.addObject("section", "/debateboard/read.jsp");
+		mv.addObject("section", "/freeboard/read.jsp");
 		mv.setViewName("/WEB-INF/index.jsp");
 		return mv;
 	}

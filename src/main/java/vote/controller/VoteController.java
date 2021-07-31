@@ -1,5 +1,6 @@
 package vote.controller;
 
+import java.util.Random;
 import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,12 +87,12 @@ public class VoteController {
 		int count = Integer.parseInt(num);
 		
 		String itemnum[] = req.getParameterValues("itemnum"); 
-		boolean result = voteService.updatePoll(count, itemnum);
-		
-		String msg="투표가 등록되지 않았습니다.";
-		
-		 if(result) 
-			 msg = "투표하였습니다."; 
+//		boolean result = voteService.updatePoll(count, itemnum);
+		voteService.updatePoll(count, itemnum);
+//		String msg="투표가 등록되지 않았습니다.";
+//		
+//		 if(result) 
+//			 msg = "투표하였습니다."; 
 		 
 		Vector<PollListVo> vlist = voteService.getAllList();
 		PollListVo plvo = new PollListVo();
@@ -100,7 +101,7 @@ public class VoteController {
 		Vector<String> list = voteService.getItem(count);
 		int voteCount = voteService.sumCount(count);		
 			 
-		mv.addObject("msg", msg);
+		//mv.addObject("msg", msg);
 		mv.addObject("alllist", vlist);
 		mv.addObject("plvo", plvo);
 		mv.addObject("slist", list);
@@ -111,5 +112,34 @@ public class VoteController {
 		return mv;
 	}
 	
-	
+	@RequestMapping("pollview")
+	public ModelAndView view(String num) {
+		ModelAndView mv = new ModelAndView();
+		Random r = new Random();
+		int view_num = Integer.parseInt(num);
+		
+		PollListVo plvo = voteService.getPollRead(view_num);
+		PollItemVo pivo = new PollItemVo();
+		int count = pivo.getCount();
+		
+		Vector<PollItemVo> vlist = voteService.getView(view_num);
+		Vector<String> item = voteService.getItem(view_num);
+		
+		int sumCnt = voteService.sumCount(view_num);
+		int maxCnt = voteService.getMaxcount(view_num);	
+		int ratio = (int)(Math.round((double)count/sumCnt*100));
+		String rgb = "#"+ Integer.toHexString(r.nextInt(255*255*255));
+		System.out.println(ratio);
+		
+		mv.addObject("plvo", plvo);
+		mv.addObject("item", item);
+		mv.addObject("vlist", vlist);
+		mv.addObject("count", count);
+		mv.addObject("ratio", ratio);
+		mv.addObject("rgb", rgb);
+		mv.addObject("sumCnt", sumCnt);
+		mv.addObject("maxCnt", maxCnt);
+		mv.setViewName("/WEB-INF/vote/pollView.jsp");
+		return mv;
+	}
 }
