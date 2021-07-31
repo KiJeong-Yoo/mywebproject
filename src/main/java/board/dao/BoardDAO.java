@@ -29,8 +29,8 @@ public class BoardDAO implements DebateInter, FreeInter {
 		String sql = null;
 		try {
 //			sql="insert into board values(?, board_idx_seq.nextval, ?, ?, 0, board_groupid_seq.nextval, 0, 0, 0, ?, ?, sysdate)";
-//			sql="insert into board values(?, (select nvl(max(idx), 0) + 1 from board), ?, ?, 0, (select nvl(max(groupid), 0) + 1 from board), 0, 0, 0, ?, ?, sysdate)";
-			sql="insert into board values(?, (select nvl(max(idx), 0) + 1 from board), ?, ?, 0, b_groupid_seq.nextval, 0, 0, 0, ?, ?, sysdate)";
+			sql="insert into board values(?, (select nvl(max(idx), 0) + 1 from board), ?, ?, 0, (select nvl(max(groupid), 0) + 1 from board), 0, 0, 0, ?, ?, sysdate)";
+//			sql="insert into board values(?, (select nvl(max(idx), 0) + 1 from board), ?, ?, 0, b_groupid_seq.nextval, 0, 0, 0, ?, ?, sysdate)";
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, board.getBoardid());
 			pstmt.setString(2, board.getTitle());

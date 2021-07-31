@@ -44,7 +44,7 @@
 						</td>
 					</tr>
 				</table>
-				<input type="hidden" name="num" value="${voteCount}">
+				<input type="hidden" name="num" value="${plvo.num}">
 			</form>
 	</div>
 	<div align="center">
