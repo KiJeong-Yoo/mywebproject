@@ -402,5 +402,7 @@ public class BoardDAO implements DebateInter, FreeInter {
 		}
 		return pageboard;
 	}
+
+	
 	
 }

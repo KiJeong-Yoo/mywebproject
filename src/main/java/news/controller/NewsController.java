@@ -34,6 +34,8 @@ public class NewsController {
 	public ModelAndView recommend() {
 		ModelAndView mv= new ModelAndView();
 		List<News> all_list = newsService.print();
+		List<News> top_list = newsService.topcount();
+		mv.addObject("topnews", top_list);
 		mv.addObject("news", all_list);
 		mv.addObject("section", "/news/newsrecommend.jsp");
 		mv.setViewName("/WEB-INF/index.jsp");
@@ -55,6 +57,8 @@ public class NewsController {
 		ModelAndView mv= new ModelAndView();
 		newsService.readcountUpdate(aid);
 		News news = newsService.newsChoice(aid);
+		List<News> top_list = newsService.topcount();
+		mv.addObject("topnews", top_list);
 		mv.addObject("news", news);
 		mv.addObject("section", "/news/newscontent.jsp");
 		mv.setViewName("/WEB-INF/index.jsp");

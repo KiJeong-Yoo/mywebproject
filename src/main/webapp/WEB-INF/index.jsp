@@ -16,9 +16,4 @@
 <jsp:include page="/WEB-INF${section}" />
 <jsp:include page="/WEB-INF/main/footer.jsp" flush="true" />
 </body>
-<script>
-/* if( '${msg}' != null) {
-	alert(${msg});			
-} */
-</script>
 </html>

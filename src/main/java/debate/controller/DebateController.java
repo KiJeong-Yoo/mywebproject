@@ -69,7 +69,7 @@ public class DebateController {
 		mv.addObject("comlist", list);
 		mv.addObject("cboard", commentlist);
 		mv.addObject("requestPage", request_Page);
-		mv.addObject("section", "/freeboard/read.jsp");
+		mv.addObject("section", "/debateboard/read.jsp");
 		mv.setViewName("/WEB-INF/index.jsp");
 		return mv;
 	}
@@ -130,16 +130,16 @@ public class DebateController {
 	public ModelAndView delete(HttpServletRequest req, String idx, String requestPage, String writeid) {
 		HttpSession session = req.getSession();
 		ModelAndView mv = new ModelAndView();
-		
+
 		if(session.getAttribute("login") == null) {
 			mv.addObject("section","/login/loginMain.jsp");
 	   		mv.setViewName("/WEB-INF/index.jsp");
 			return mv;
 		} else {
-			_requestPage = requestPage;
+			
 			if(session.getAttribute("login").equals(writeid)) {
 				int dresult = debateService.delete(Integer.parseInt(idx), boardid);
-				
+				System.out.println(dresult);
 				if(dresult == 1) {
 					request_Page = 1;
 					_requestPage = requestPage;
@@ -152,15 +152,17 @@ public class DebateController {
 					mv.addObject("requestPage", request_Page);
 		   			mv.addObject("section", "/debateboard/debatemain.jsp");
 		   			mv.setViewName("/WEB-INF/index.jsp");
-				
+		   			return mv;
 				}
 			} else {
+				_requestPage = requestPage;
 				BoardVO board = debateService.select(Integer.parseInt(idx), boardid);
 				mv.addObject("board", board);
 				mv.addObject("requestPage", _requestPage);
 				mv.addObject("id", "xx");
 	   			mv.addObject("section", "/debateboard/read.jsp");
 	   			mv.setViewName("/WEB-INF/index.jsp");
+	   			return mv;
 			}
 		}
 		return mv;

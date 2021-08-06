@@ -19,13 +19,7 @@ function dataCheck(){
 <body>
 <div class="container">
   <h2><button class="btn" onclick="location.href='/index'"><i class="fa fa-home"></i></button>글작성</h2>
-  <form name=form action="/photoboard/insert.do" method=post>
-  
-    <select name="boardid">
-    	<option value="1">토론 게시판</option>
-    	<option value="2">자유 게시판</option>
-    	<option value="3">포토 게시판</option>
-    </select>
+  <form name=form action="/photoboard/insert.do" method="post" enctype="multipart/form-data"> 
     
     <div class="form-group">
       <label for="title">제목</label>
@@ -34,14 +28,14 @@ function dataCheck(){
     
     <div class="form-group">
       <label for="writeName">작성자</label>
-      <input type="text" class="form-control" id="writeName" name="writeName" value="${login}" readonly />
+      <input type="text" class="form-control" id="writeId" name="writeId" value="${login}" readonly />
     </div>
     
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="content">글내용</label>
       <textarea class="form-control" id="content" name="content" cols="80%" rows="10" placeholder="글을 입력 하세요">
       </textarea>
-    </div>
+    </div> -->
     
     <div class="form-group">
       <input type="file" name="upload" value="파일첨부" class="board_view_input" />

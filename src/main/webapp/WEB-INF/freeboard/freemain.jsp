@@ -14,14 +14,14 @@
 			 	<option value=write_name>작성자</option>
 		 	</select>
 		    
-		    <input onmouseover="this.focus()" type="text" id="search" name="search" placeholder="찾을 내용을 입력하세요">
+		    <input onmouseover="this.focus()" type="text" id="search" name="search" placeholder="찾을 내용을 입력하세요" style="width: 300px; height: 35px;">
 		    <input type="hidden" name="boardid" id="boardid" value="2">
-		    <input type="submit" class="btn btn-default" value="검색">
+		    <input type="submit" class="btn btn-default" value="검색" style="width: 100px; height: 35px;">
 	    </div>
 	 </form>
 	<!-- 검색리스트  -->
-	
-	<table class="table">
+	<div class="board_list_wrap" style="width: 100%; border: 1px solid black;">
+			<table class="border_list" style="border-top: 2px solid green; border-collapse: collapse; padding: 50px; width: 100%;">
 		<!-- 페이지번호 표시 -->
 		<tr align="right">
 			<td colspan="5">[${pageboard.requestPage}/${pageboard.totalPage}]</td>
@@ -35,7 +35,7 @@
 			<th>조회수</th>
 		</tr>
 		<c:forEach var="board" items="${pageboard.list}">
-			<tr onmouseover="this.style.backgroundColor='lightgray'" onmouseout="this.style.backgroundColor='white'" onclick="location.href='/freeboard/read?idx=${board.idx}&requestPage=${pageboard.requestPage}'">
+			<tr class="tit" onclick="location.href='/freeboard/read?idx=${board.idx}&requestPage=${pageboard.requestPage}'">
 				<td>${board.idx}</td>
 				<td>
 					<c:if test="${board.depth > 0}">
@@ -72,5 +72,6 @@
 		</tr>
 		<!-- end page list -->
 	</table>
+	</div>
 </div>
 </section>

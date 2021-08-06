@@ -45,6 +45,13 @@
                         <tr class="join_tr">
                             <td class="join_td">이메일</td>
                             <td class="join_td"><input class="inputtext"  type="email" name="joinEmail" id="joinEmail" placeholder="필수입력"></td>
+                            <td class="join_td"><button id="emailbtn" name="emailbtn" onclick="emailCheck()">인증</button>                        
+                        </tr>
+                        <tr class="codetext"style="display: none">
+                        	<td class="join_td">인증번호 입력</td>
+                        	<td class="join_td"><input class="codetext"  type="text" name="joinEmailCode" id="joinEmailCode" placeholder="인증번호"></td>
+                        	<td class="join_td"><button id="checkCodeBtn" onclick="checkEmailCode()">인증번호 확인</button></td>
+                        	<input type="hidden" name="emailCodeCheck" value="false">
                         </tr>
                         <tr class="join_tr">
                             <td class="join_td" colspan="2">
@@ -116,7 +123,25 @@
         	return false;
         }
         
-        return true;
-       
+        return true;       
     }
+    
+    $(function() {
+    	$('.emailbtn').click(function() {    	
+    		
+    		$('.codetext').css('display', '');		 
+    	})
+    });
+    
+    $('.emailbtn').click(function() {
+    	var mail = $('.joinEmail').val();
+    	$.ajax({
+    		type: 'post',
+    		url: '/checkEmailCode',
+    		data: {mail:mail},
+    		dataType: 'json',
+    	});
+    	alert("인증번호가 전송되었습니다.");
+    	isCertification=true;
+    });
 </script>

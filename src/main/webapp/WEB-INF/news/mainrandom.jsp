@@ -4,7 +4,7 @@
 <section>
 	<div id="news_recommend">
 			<div id="recommend_head">
-				<h4><a href="/news/newsmain">축구 뉴스</a></h4>		
+				<span style="font-size: 30px;"><a href="/news/newsmain">축구 뉴스</a></span>		
 			</div>
 			<div class="news_table">
 				<table>

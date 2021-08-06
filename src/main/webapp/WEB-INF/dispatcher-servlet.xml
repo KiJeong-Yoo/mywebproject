@@ -11,15 +11,17 @@
       <property name="driverClassName" value = "oracle.jdbc.driver.OracleDriver"/>
       <property name="url" value = "jdbc:oracle:thin:@localhost:1521:xe"/>
       <!-- <property name="url" value = "jdbc:oracle:thin:@localhost:59160:xe"/> -->
-      <property name="username" value = "C##ADMIN"/>
+      <!-- <property name="username" value = "C##ADMIN"/> -->
+      <property name="username" value = "system"/>
       <property name="password" value = "1111"/>
 </bean>
-   
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>   
+
 <context:component-scan base-package="*.controller" />
-<context:component-scan base-package="member.dao, news.dao, board.dao, free.dao, comment.dao, vote.dao" />
-<context:component-scan base-package="member.service, news.service, debate.service, free.service, comment.service, vote.action, vote.service" />
-<context:component-scan base-package="member.vo, news.vo, board.vo, comment.vo, vote.vo" />
-<context:component-scan base-package="news.crawling" />
+<context:component-scan base-package="*.dao" />
+<context:component-scan base-package="*.service" />
+<context:component-scan base-package="*.vo" />
+<context:component-scan base-package="news.crawling, vote.action" />
 
 
 

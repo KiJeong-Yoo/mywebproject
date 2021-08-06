@@ -1,22 +1,21 @@
 @charset "UTF-8";
-
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 * {
-	font-family: 'Gothic A1', sans-serif;
+/* 	font-family: 'Gothic A1', sans-serif; */
 	box-sizing:border-box;
 	margin: 0;
 	padding: 0;
 }
 
-html {
-	position: relative;
-}
-
 body {
+	position: relative;
     margin: 0 auto;
-    width: 70%;
-    height: 1400px;
-    display: grid;
-  	grid-template-rows: 1fr auto;  
+    width: 70%; 
 }
 
 #container {
@@ -26,7 +25,6 @@ body {
 #header_con {
     width: 100%;
     height: 50px;
-    border: 1px solid black;
 }
 
 header {
@@ -62,7 +60,6 @@ header {
     margin-top: 20px;
     width: 100%;
     height: 100px;
-    border: 1px solid black;
 }
 
 .main_menu_ul {
@@ -302,7 +299,7 @@ header {
 }
 
 /* 슬라이드css */
-        ul, li {
+        .slidelist, .slideitem {
         	list-style:none;
         }
         
@@ -435,13 +432,13 @@ span {
     margin-top: 40px;
 }
 
-input {
+/* input {
     width: 400px;
     height: 50px;
     font-size: 20px;
     border-radius: 0.2rem;
     border: 1px solid lightgray;
-}
+} */
 
 .join_a {
     text-decoration: none;
@@ -597,34 +594,6 @@ input {
 }
 
 
-/* 채팅창 */
-#chat_con {
-	width:50px;
-	height: 50px;
-	position: fixed;
-	top: 700px;
-	right: 100px;
-}
-
-#chatbox {
-	width: 100px;	
-}
-
-#messageWindow {
-	width: 100px;
-	height: 100px;
-}
-
-#inputMessage {
-	width:100px;
-	height: 50px;
-}
-
-#chatbox > #submit {
-	width:50px;
-	height: 40px;
-}
-
 /* 게시판 */
 .page-link {
     text-decoration: none;
@@ -633,10 +602,11 @@ input {
 
 .board_list_wrap {
     padding: 50px;
-} 
-
-.board_list {
     width: 100%;
+}
+ 
+
+.board_list {   
     border-top: 2px solid green;
     border-collapse: collapse;
 }
@@ -655,56 +625,53 @@ input {
     text-align: center;
 }
 
-.board_list > .tit {
+.tit {
     text-align: left;
 }
 
-.board_list > .tit:hover {
+.tit:hover {
     text-decoration: underline;
 }
 
-.board_list_wrap > .pagination {
+.pagination {
     margin-top: 20px;
     text-align: center;
     font-size: 0;
 }
 
-.board_list_wrap > .pagination > .page-link {
+.page-link {
     display: inline-block;
     margin-left: 10px;
     padding: 5px 10px;
     border-radius: 100px;
     font-size: 12px;
 }
-.board_list_wrap > .pagination > .page-link:first-child {
+
+.page-link:first-child {
     margin-left: 0;
 }
 
-.board_list_wrap > .pagination > .page-item > .bt {
+.bt {
     border: 1px solid #eee;
     background: #eee;
 }
 
-.board_list_wrap > .pagination > .page-item > .num {
+.num {
     border: 1px solid green;
     font-weight: 600;
     color: green;
 }
 
-/* .board_list_wrap > .paging > .page-item > .num > .on {
+/* .on {
     background: green;
     color: #fff;
 } */
-
-
 
 /* footer css */
 #footer_con {
 	width:100%;
 	height: 150px;
 	background-color: gray;
-	grid-row-start: 2;
-    grid-row-end: 3;
 }
 
 .footer_span {
@@ -725,25 +692,30 @@ input {
 .newsread_con {
 	margin-top: 50px;
 	width: 100%;
-	height: 900px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
 
-.news_content_title {	
-	margin-top: 30px;
+#news_con {
+	display: flex;	
 }
 
+/* .news_content_title {	
+	margin-top: 30px;
+} */
+
 .news_title {
-	font-size: 15px;
+	font-size: 25px;
 	text-align: left;
+	font-weight: bold;
 	color: black;
+	margin-bottom: 15px;
 }
 
 .news_date {
-	font-size:10px;
+	font-size:16px;
 	color:light_gray;
 	text-align: left;
 }
@@ -762,11 +734,35 @@ input {
 }
 
 .news_content {
-	font-size:14px;
+	font-size:17px;
 	color: black;
+	width: 300px;
 }
 
-section {
-	height: 1000px;
-	border: 1px solid black;
+#news_recommend {
+	width: 100%; 
+	height:200px;
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	margin-top: 20px;
 }
+
+.news_re_ul {
+	display: flex;
+	
+}
+
+a {
+	text-decoration: none;
+	color:black;
+}
+
+.newscontent_container {
+	display:flex;
+	
+}
+
+
+
+
+

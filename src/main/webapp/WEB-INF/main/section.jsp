@@ -172,10 +172,9 @@
     </div>
     
     <!-- 게시판 -->
-    <div id="board_con">
+   <div id="board_con">
 		<jsp:include page="/WEB-INF/debateboard/sec_debate.jsp" />
-		<jsp:include page="/WEB-INF/freeboard/sec_free.jsp" />
-		<jsp:include page="/WEB-INF/photoboard/sec_photo.jsp" />
+		<%-- <jsp:include page="/WEB-INF/photoboard/sec_photo.jsp" /> --%>
     </div>
     
     <!-- 뉴스 -->

@@ -1,5 +1,7 @@
 package debate.inter;
 
+import java.util.List;
+
 import board.vo.BoardVO;
 import board.vo.PageBoard;
 
@@ -20,5 +22,6 @@ public interface DebateInter {
 	PageBoard searchlist(String field, String search, int request_Page, int parseInt);
 
 	int insert(BoardVO board);
+
 	
 }
