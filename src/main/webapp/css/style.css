@@ -766,3 +766,43 @@ a {
 
 
 
+
+
+
+
+
+
+
+
+
+
+.form-btn-group{
+	
+}
+.form-btn-group button{
+	margin: 10px;
+}
+
+
+
+
+/* 
+	종원 
+
+ */
+ .search{
+ 	margin: 50px;
+ }
+.search input[type=text]{
+	width: 500px;
+}
+.search select{
+	width: 90px;
+}
+.search input[type=submit]{
+	width: 60px;
+}
+.search div{
+	display: inline-block;
+	margin: 5px;
+}

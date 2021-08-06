@@ -15,11 +15,11 @@
       </textarea>
     </div>
     
-    <div class="form-group">
-		<button onclick="location.href='/debateboard/debatemain?requestPage=${requestPage}'">목록으로</button>
-		<button onclick="location.href='/debateboard/reply?idx=${board.idx}&groupid=${board.groupid}&depth=${board.depth}&reOrder=${board.reOrder}&title=${board.title}&requestPage=${requestPage}'">답글쓰기</button>
-		<button onclick="location.href='/debateboard/update?idx=${board.idx}&requestPage=${requestPage}&writeid=${board.writeName}'">글 수정</button>
-		<button onclick="location.href='/debateboard/delete?idx=${board.idx}&requestPage=${requestPage}&writeid=${board.writeName}'">글 삭제</button>
+    <div class="form-group form-btn-group">
+		<button class="btn btn-light" onclick="location.href='/debateboard/debatemain?requestPage=${requestPage}'">목록으로</button>
+		<button class="btn btn-light" onclick="location.href='/debateboard/reply?idx=${board.idx}&groupid=${board.groupid}&depth=${board.depth}&reOrder=${board.reOrder}&title=${board.title}&requestPage=${requestPage}'">답글쓰기</button>
+		<button class="btn btn-light" onclick="location.href='/debateboard/update?idx=${board.idx}&requestPage=${requestPage}&writeid=${board.writeName}'">글 수정</button>
+		<button class="btn btn-light" onclick="location.href='/debateboard/delete?idx=${board.idx}&requestPage=${requestPage}&writeid=${board.writeName}'">글 삭제</button>
     </div>
 	<!-- comment -->
     <div class="comment_table">

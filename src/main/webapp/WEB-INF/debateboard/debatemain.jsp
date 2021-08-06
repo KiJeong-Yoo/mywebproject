@@ -75,7 +75,7 @@
 		<h2><button class="btn" onclick="location.href='/index'"><i class="fa fa-home"></i></button>토론 게시판</h2>
 		<!-- 검색리스트 -->
 		<form name="form" action="/debateboard/searchList" method="post">
-		 	<div class="form-group">
+		 	<div class="form-group search">
 		 		<div class="col-xs-2" style="display: inline-block;"> 	
 				 	<select class="form-control" name=field>
 					 	<option value=title>제목</option>
@@ -93,8 +93,8 @@
 		    </div>
 		 </form>
 		<!-- 검색리스트  -->
-		<div class="board_list_wrap" style="width: 100%;">
-			<table class="border_list" style="border-top: 2px solid green; border-collapse: collapse; padding: 50px; width: 100%;">
+		<div class="board_list_wrap">
+			<table class="border_list µ">
 				<!-- 페이지번호 표시 -->
 				<tr align="right" style="border-bottom: 1px solid #ccc;">
 					<td colspan="5">[${pageboard.requestPage}/${pageboard.totalPage}]</td>
@@ -141,7 +141,7 @@
 			    	</li>
 			    </c:if>	    
 			 </ul>	
-			<button onclick="location.href='/debateboard/insert'">글쓰기</button>
+			<button class="btn btn-primary" onclick="location.href='/debateboard/insert'">글쓰기</button>
 		</div>
 	</div>
 </section>
