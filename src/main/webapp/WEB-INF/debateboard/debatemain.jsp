@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/WEB-INF/jstl.jsp" %>
 <style>
 .page-link {
     text-decoration: none;
@@ -94,7 +94,7 @@
 		 </form>
 		<!-- 검색리스트  -->
 		<div class="board_list_wrap">
-			<table class="border_list µ">
+			<table class="border_list table">
 				<!-- 페이지번호 표시 -->
 				<tr align="right" style="border-bottom: 1px solid #ccc;">
 					<td colspan="5">[${pageboard.requestPage}/${pageboard.totalPage}]</td>

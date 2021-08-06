@@ -1,15 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/WEB-INF/jstl.jsp" %>
 <div class="container">
 	<h2><button class="btn" onclick="location.href='/index'"><i class="fa fa-home"></i></button>글읽기</h2>
-     
+   <div class="form-group">
+     <table class="table">
+     	<tr>
+     		<td colspan="2">
+     			글번호[${board.idx}] 
+     		</td>
+     		<td colspan="2">
+     			작성자 : ${board.writeName } 
+     		</td>
+     	</tr>
+     	<tr>
+     		<td colspan="4">
+     			제목 : ${board.title}
+     		</td>
+     	</tr>
+     	<tr>
+     		<td colspan="2">
+     			작성일:${board.writeDay} 
+     		</td>
+     		<td colspan="2">
+     			조회수:${board.readcount}
+     		</td>
+     	</tr>
+     </table>
+   </div>  
+    
+		
+		
+ 	
     <div class="form-group">
-		<p>글번호[${board.idx}] 제목 : ${board.title}</p>
-		<p>작성자 : ${board.writeName } 작성일:${board.writeDay} 조회수:${board.readcount}</p>
- 	</div>  
-    <div class="form-group">
-      <label for="content">내용</label>
+      <span class="label">내용</span>
       <textarea class="form-control" disabled id="content" name="content" cols="80%" rows="10" placeholder="글을 입력 하세요">
       ${board.content}
       </textarea>
@@ -22,6 +46,7 @@
 		<button class="btn btn-light" onclick="location.href='/debateboard/delete?idx=${board.idx}&requestPage=${requestPage}&writeid=${board.writeName}'">글 삭제</button>
     </div>
 	<!-- comment -->
+<c:if test="${fn:length(cboard.list) > 0 }">
     <div class="comment_table">
 	 	<table class="table">
 			<tr class="success">
@@ -83,6 +108,7 @@
 			<!-- end page list -->
 		</table>
 	</div>
+</c:if>
 </div>
 <script>
 let content = document.getElementById("c_content");

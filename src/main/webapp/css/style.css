@@ -670,8 +670,9 @@ span {
 /* footer css */
 #footer_con {
 	width:100%;
-	height: 150px;
+	height: 170px;
 	background-color: gray;
+	
 }
 
 .footer_span {
@@ -762,6 +763,10 @@ a {
 	
 }
 
+.container{
+	height: 700px;
+	
+}
 
 
 
@@ -777,7 +782,7 @@ a {
 
 
 .form-btn-group{
-	
+	float: right;
 }
 .form-btn-group button{
 	margin: 10px;
@@ -806,3 +811,10 @@ a {
 	display: inline-block;
 	margin: 5px;
 }
+
+
+.form-group{
+
+  font-family: "Helvetica Nene", Helvetica, Arial, 맑은 고딕;,"malgun gothic", sans-serif;
+
+ }
