@@ -1,26 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<%@ include file="/WEB-INF/jstl.jsp" %>
 <div class="container">
 	<h2><button class="btn" onclick="location.href='/index'"><i class="fa fa-home"></i></button>글읽기</h2>
      
 	<div class="form-group">
-		<p>글번호[${board.idx}] 제목 : ${board.title}</p>
-		<p>작성자 : ${board.writeName } 작성일:${board.writeDay} 조회수:${board.readcount}</p>
+		<table class="table">
+     	<tr>
+     		<td colspan="2">
+     			글번호[${board.idx}] 
+     		</td>
+     		<td colspan="2">
+     			작성자 : ${board.writeName } 
+     		</td>
+     	</tr>
+     	<tr>
+     		<td colspan="4">
+     			제목 : ${board.title}
+     		</td>
+     	</tr>
+     	<tr>
+     		<td colspan="2">
+     			작성일:${board.writeDay} 
+     		</td>
+     		<td colspan="2">
+     			조회수:${board.readcount}
+     		</td>
+     	</tr>
+     </table>
 	</div>  
 	<div class="form-group">
-		<label for="content">내용</label>
-		<textarea class="form-control" disabled id="content" name="content" cols="80%" rows="10" placeholder="글을 입력 하세요">${board.content}</textarea>
-	</div>
+      <span class="label">내용</span>
+      <textarea class="form-control" disabled id="content" name="content" cols="80%" rows="10" placeholder="글을 입력 하세요">
+      ${board.content}
+      </textarea>
+    </div>
     
-    <div class="form-group">
-		<button onclick="location.href='/freeboard/freemain?requestPage=${requestPage}'">목록으로</button>
-		<button onclick="location.href='/freeboard/reply?idx=${board.idx}&groupid=${board.groupid}&depth=${board.depth}&reOrder=${board.reOrder}&title=${board.title}&requestPage=${requestPage}'">답글쓰기</button>
-		<button onclick="location.href='/freeboard/update?idx=${board.idx}&requestPage=${requestPage}'">글 수정</button>
-		<button onclick="location.href='/freeboard/delete?idx=${board.idx}&requestPage=${requestPage}'">글 삭제</button>
+    <div class="form-group form-btn-group">
+		<button class="btn btn-light" onclick="location.href='/freeboard/freemain?requestPage=${requestPage}'">목록으로</button>
+		<button class="btn btn-light" onclick="location.href='/freeboard/reply?idx=${board.idx}&groupid=${board.groupid}&depth=${board.depth}&reOrder=${board.reOrder}&title=${board.title}&requestPage=${requestPage}'">답글쓰기</button>
+		<button class="btn btn-light" onclick="location.href='/freeboard/update?idx=${board.idx}&requestPage=${requestPage}'">글 수정</button>
+		<button class="btn btn-light" onclick="location.href='/freeboard/delete?idx=${board.idx}&requestPage=${requestPage}'">글 삭제</button>
 		
-    	<form action="/comment/freecomment" method="post" onsubmit="return check()">
+    	<form action="/comment/freecomment" method="get" onsubmit="return check()">
     		<input type="text" name="c_content" id="c_content" style="width: 100px; height: 40px;">
     		<input type="hidden" name="pidx" value="${board.idx}">
     		<input type="hidden" name="cwriteid" value="${login}">
@@ -29,6 +51,7 @@
 		</form>
     </div>
     <!-- comment -->
+    <c:if test="${fn:length(cboard.list) > 0 }">
     <div class="comment_table">
 	 	<table class="table">
 			<tr class="success">
@@ -55,6 +78,7 @@
 							<form action="/comment/creply" method="post" onsubmit="return check2()">
 								<input type="text" name="commentreply">
 								<input type="hidden" name="commentidx" value="${clist.commentidx}">
+								<input type="hidden" name="boardid" value="2">
 								<input type="hidden" name="pidx" value="${board.idx}">
 								<input type="hidden" name="groupid" value="${clist.groupid}">
 								<input type="hidden" name="depth" value="${clist.depth}">
@@ -65,8 +89,8 @@
 							</form>
 						</div>
 					</td>
-					<td><button onclick="location.href='/comment/cupdate?idx=${clist.commentidx}&requestPage=${requestPage}&pidx=${board.idx}'">댓글 수정</button></td>
-					<td><button onclick="location.href='/comment/cdelete?requestPage=${requestPage}&groupid=${clist.groupid}&pidx=${board.idx}&reorder=${clist.reOrder}'">댓글 삭제</button></td>
+					<td><button class="btn btn-light"  onclick="location.href='/comment/cupdate?idx=${clist.commentidx}&requestPage=${requestPage}&pidx=${board.idx}&boardid=2'">댓글 수정</button></td>
+					<td><button class="btn btn-light"  onclick="location.href='/comment/cdelete?requestPage=${requestPage}&groupid=${clist.groupid}&pidx=${board.idx}&reorder=${clist.reOrder}&boardid=2'">댓글 삭제</button></td>
 				</tr>
 			</c:forEach>
 			<!-- page list -->
@@ -74,15 +98,15 @@
 				<td colspan=4 align=center valign="center">
 					<ul class="pagination">			   
 					    <c:if test="${cboard.beginPage > 5}">
-					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${cboard.beginPage - 5}&pidx=${board.idx}">이전페이지</a></li>
+					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${cboard.beginPage - 5}&pidx=${board.idx}&boardid=2">이전페이지</a></li>
 					    </c:if>
 					 
 					    <c:forEach var="i" begin="${cboard.beginPage}" end="${cboard.endPage}">
-					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${i}&pidx=${board.idx}">${i}</a></li>
+					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${i}&pidx=${board.idx}&boardid=2">${i}</a></li>
 					    </c:forEach>
 					   
 					    <c:if test="${cboard.totalPage ne cboard.endPage}">
-					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${cboard.endPage + 1}&pidx=${board.idx}">다음페이지</a></li>
+					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${cboard.endPage + 1}&pidx=${board.idx}&boardid=2">다음페이지</a></li>
 					    </c:if>			    
 					</ul>
 				</td>
@@ -90,6 +114,7 @@
 			<!-- end page list -->
 		</table>
 	</div>
+	</c:if>
 </div>
 
 <script>

@@ -44,6 +44,14 @@
 		<button class="btn btn-light" onclick="location.href='/debateboard/reply?idx=${board.idx}&groupid=${board.groupid}&depth=${board.depth}&reOrder=${board.reOrder}&title=${board.title}&requestPage=${requestPage}'">답글쓰기</button>
 		<button class="btn btn-light" onclick="location.href='/debateboard/update?idx=${board.idx}&requestPage=${requestPage}&writeid=${board.writeName}'">글 수정</button>
 		<button class="btn btn-light" onclick="location.href='/debateboard/delete?idx=${board.idx}&requestPage=${requestPage}&writeid=${board.writeName}'">글 삭제</button>
+ 		
+ 		<form action="/comment/debatecomment" method="get" onsubmit="return check()">
+    		<input type="text" name="c_content" id="c_content" style="width: 100px; height: 40px;">
+    		<input type="hidden" name="pidx" value="${board.idx}">
+    		<input type="hidden" name="cwriteid" value="${login}">
+    		<input type="hidden" name="crequestPage" value="${requestPage}">
+    		<input type="submit" value="댓글 달기">
+		</form>   
     </div>
 	<!-- comment -->
 <c:if test="${fn:length(cboard.list) > 0 }">
@@ -73,6 +81,7 @@
 							<form action="/comment/creply" method="post" onsubmit="return check2()">
 								<input type="text" name="commentreply">
 								<input type="hidden" name="commentidx" value="${clist.commentidx}">
+								<input type="hidden" name="boardid" value="1">
 								<input type="hidden" name="pidx" value="${board.idx}">
 								<input type="hidden" name="groupid" value="${clist.groupid}">
 								<input type="hidden" name="depth" value="${clist.depth}">
@@ -83,8 +92,8 @@
 							</form>
 						</div>
 					</td>
-					<td><button onclick="location.href='/comment/cupdate?idx=${clist.commentidx}&requestPage=${requestPage}&pidx=${board.idx}'">댓글 수정</button></td>
-					<td><button onclick="location.href='/comment/cdelete?requestPage=${requestPage}&groupid=${clist.groupid}&pidx=${board.idx}&reorder=${clist.reOrder}'">댓글 삭제</button></td>
+					<td><button class="btn btn-light"  onclick="location.href='/comment/cupdate?idx=${clist.commentidx}&requestPage=${requestPage}&pidx=${board.idx}&boardid=1'">댓글 수정</button></td>
+					<td><button class="btn btn-light"  onclick="location.href='/comment/cdelete?requestPage=${requestPage}&groupid=${clist.groupid}&pidx=${board.idx}&reorder=${clist.reOrder}&boardid=1'">댓글 삭제</button></td>
 				</tr>
 			</c:forEach>
 			<!-- page list -->
@@ -92,15 +101,15 @@
 				<td colspan=4 align=center valign="center">
 					<ul class="pagination">			   
 					    <c:if test="${cboard.beginPage > 5}">
-					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${cboard.beginPage - 5}&pidx=${board.idx}">이전페이지</a></li>
+					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${cboard.beginPage - 5}&pidx=${board.idx}&boardid=1">이전페이지</a></li>
 					    </c:if>
 					 
 					    <c:forEach var="i" begin="${cboard.beginPage}" end="${cboard.endPage}">
-					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${i}&pidx=${board.idx}">${i}</a></li>
+					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${i}&pidx=${board.idx}&boardid=1">${i}</a></li>
 					    </c:forEach>
 					   
 					    <c:if test="${cboard.totalPage ne cboard.endPage}">
-					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${cboard.endPage + 1}&pidx=${board.idx}">다음페이지</a></li>
+					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${cboard.endPage + 1}&pidx=${board.idx}&boardid=1">다음페이지</a></li>
 					    </c:if>			    
 					</ul>
 				</td>
@@ -139,14 +148,14 @@ $(function() {
 	})
 });
 </script>
-<c:if test="${id eq 'x'}">
+<%-- <c:if test="${id eq 'not equals'}">
 	<script>
 		alert("글쓴이만 수정이 가능 합니다.");
 	</script>
 </c:if>
 
-<c:if test="${id eq 'xx'}">
+<c:if test="${id eq 'not equals'}">
 	<script>
 		alert("글쓴이만 삭제가 가능 합니다.");
 	</script>
-</c:if>
+</c:if> --%>

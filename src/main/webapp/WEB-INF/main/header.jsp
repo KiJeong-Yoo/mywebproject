@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div id="header_con">
-	<header>
+
+	<header class="container-fluid navbar-fixed-bottom">
 		<div id="logo_img">
 	        <a href="/index"><img src="/img/logo3.jpg" width="150px"></a>
 	    </div>
@@ -23,4 +23,3 @@
 		</c:if>
 	    </div>
 	</header>
-</div>

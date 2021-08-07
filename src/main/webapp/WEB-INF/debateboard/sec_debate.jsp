@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section>
-	<div style="display: flex; justify-content: space-between; margin-top: 20px; padding: 0 20px;">
+	<div style="display: flex; justify-content: space-evenly; margin-top: 20px; padding: 0 20px;">
 		<div class="sec_debate_con">
 			<h2 class="sec_debate_h">토론 게시판</h2>
 			<hr>

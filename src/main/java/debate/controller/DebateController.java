@@ -97,7 +97,7 @@ public class DebateController {
 				BoardVO board = debateService.select(Integer.parseInt(idx), boardid);
 				mv.addObject("board", board);
 				mv.addObject("requestPage", _requestPage);
-				mv.addObject("id", "x");
+				mv.addObject("id", "not equals");
 				mv.addObject("section", "/debateboard/read.jsp");
 				mv.setViewName("/WEB-INF/index.jsp");
 			}
@@ -139,7 +139,8 @@ public class DebateController {
 			
 			if(session.getAttribute("login").equals(writeid)) {
 				int dresult = debateService.delete(Integer.parseInt(idx), boardid);
-				System.out.println(dresult);
+				System.out.println(writeid);
+				
 				if(dresult == 1) {
 					request_Page = 1;
 					_requestPage = requestPage;
@@ -159,7 +160,7 @@ public class DebateController {
 				BoardVO board = debateService.select(Integer.parseInt(idx), boardid);
 				mv.addObject("board", board);
 				mv.addObject("requestPage", _requestPage);
-				mv.addObject("id", "xx");
+				mv.addObject("id", "not equals");
 	   			mv.addObject("section", "/debateboard/read.jsp");
 	   			mv.setViewName("/WEB-INF/index.jsp");
 	   			return mv;
