@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section>
+<div class="container">
 	<div>
 		<h2>VOTE THIS</h2>
 		
-		<b style="font-family:d2coding; font-size:15pt;">
-		<span style="color: red;">HOT</span> VOTE THIS WEEK</b><br/>
+		<b style="font-family:d2coding; font-size:15pt;"></b><br/>
 		<form action="/vote/pollFormProc" onsubmit="return check()">
-				<table border="1">
+				<table class="table" border="1">
 					<tr>
 						<td colspan="2" width="300">Q : ${plvo.question} 
 						<font color="blue">${voteCount}</font></td>
@@ -38,7 +38,7 @@
 							</c:if>
 						</td>
 						<td width="150">
-							<input type="button" value="결과" 
+							<input class="btn" type="button" value="결과" 
 							onclick="javascript:window.open('/vote/pollview?num=${voteCount}'
 							,'pollview','width=650, height=550')">
 						</td>
@@ -54,7 +54,7 @@
 		<table>
 			<tr>
 				<td>
-				<table  border="1">
+				<table class="table" border="1">
 					<tr>
 						<th width="50">번호</th>
 						<th width="250" align="left">질문</th>
@@ -76,6 +76,7 @@
 				</td>
 			</tr>
 		</table>
+	</div>
 	</div>
 </section>
 <script>

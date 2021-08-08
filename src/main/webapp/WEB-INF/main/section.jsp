@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section>
+<div class="container-md">
 	<div id="slide_con">
 		    <div class="slidebox">
         <input type="radio" name="slide" id="slide01" checked>
@@ -174,13 +175,8 @@
     <!-- 게시판 -->
    <div id="board_con">
 		<jsp:include page="/WEB-INF/debateboard/sec_debate.jsp" />
-		<%-- <jsp:include page="/WEB-INF/photoboard/sec_photo.jsp" /> --%>
     </div>
-    
-    <!-- 뉴스 -->
-    <div id="news_con">
-    	<jsp:include page="/WEB-INF/news/mainrandom.jsp" />
-    </div>         
+    </div>        
 </section>
 <script>
 //날씨

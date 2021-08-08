@@ -130,6 +130,7 @@ public class DebateController {
 	public ModelAndView delete(HttpServletRequest req, String idx, String requestPage, String writeid) {
 		HttpSession session = req.getSession();
 		ModelAndView mv = new ModelAndView();
+		System.out.println("session : " + session.getAttribute("login"));
 
 		if(session.getAttribute("login") == null) {
 			mv.addObject("section","/login/loginMain.jsp");
@@ -139,7 +140,6 @@ public class DebateController {
 			
 			if(session.getAttribute("login").equals(writeid)) {
 				int dresult = debateService.delete(Integer.parseInt(idx), boardid);
-				System.out.println(writeid);
 				
 				if(dresult == 1) {
 					request_Page = 1;

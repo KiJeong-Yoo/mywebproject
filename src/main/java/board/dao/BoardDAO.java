@@ -135,6 +135,89 @@ public class BoardDAO implements DebateInter, FreeInter {
 		}
 		return pageboard;
 	}
+	
+	public PageBoard mainpagelist(int requestPage, int boardid) {
+		
+		PageBoard pageboard = null; 
+		
+		int totalPage = 0; // 전체 페이지 = 전체 글 수 / 페이지당 표시 글 수   
+		int beginPage = 0; // 시작 페이지 - 요청 페이지 기준으로 표시될 페이지 시작 번호
+		int endPage = 0;   // 끝 페이지 - 요청 페이지 기준으로 표시될 페이지 마지막 번호
+		int firstRow = 0;   // 시작 글번호 - 요청 페이지 기준
+		int endRow = 0;     // 끝 글번호 - 요청 페이지 기준
+		int articleCount = 0; // 전체 글 수
+		int countPerPage = 5; // 페이지 당 표시될 글의 수
+		
+		List<BoardVO> list = new ArrayList<BoardVO>(); // 페이지에 대한 10개의 글 리스트
+		
+		String sql = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//1. 전체 게시물 수 구하기
+			sql = "select count(*) from board where boardid=?";
+			pstmt = ds.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, boardid);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next())
+				articleCount = rs.getInt(1); 
+			else 
+				articleCount = 0;
+			
+			//2. 전체 페이지 수
+			totalPage = articleCount / countPerPage; // 소수 제외
+			if(articleCount % countPerPage > 0) // 나머지 글의 수 파악 후 페이지 추가
+				totalPage++;
+			
+			
+			//3. 요청한 페이지에 대한 시작 글번호, 끝 글번호
+			firstRow = (requestPage - 1) * countPerPage + 1;
+			endRow = firstRow + countPerPage - 1;
+			
+			
+			//4.시작 페이지 번호, 끝 페이지 번호
+			// 5페이지 기준 if문들 조건 순서 중요
+			beginPage = ((requestPage - 1) / 5) * 5 + 1;
+			endPage = beginPage + 4;
+			
+			if(beginPage < 1)
+				beginPage = 1;
+			
+			if(endPage > totalPage) 
+				endPage = totalPage;		
+			
+			sql = "select idx, title, content, readcount, groupid, depth, re_order, isdel, write_id, write_name, write_day from (select rownum rnum, idx, title, content, readcount, groupid, depth, re_order, isdel, write_id, write_name, write_day from (select * from board a where boardid=? order by a.groupid desc, a.re_order asc) where rownum <= ?) where rnum >= ?"; 
+			
+			pstmt = ds.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, boardid);
+			pstmt.setInt(2, endRow); 
+			pstmt.setInt(3, firstRow);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardVO board=new BoardVO();
+				board.setIdx(rs.getInt("idx"));
+				board.setTitle(rs.getString("title"));
+				board.setContent(rs.getString("content"));
+				board.setReadcount(rs.getInt("readcount"));
+				board.setGroupid(rs.getInt("groupid"));
+				board.setDepth(rs.getInt("depth"));
+				board.setReOrder(rs.getInt("re_order"));
+				board.setIsdel(rs.getInt("isdel"));
+				board.setWriteId(rs.getString("write_id"));
+				board.setWriteName(rs.getString("write_name"));
+				board.setWriteDay(rs.getDate("write_day"));
+				list.add(board);
+			}
+			
+			pageboard = new PageBoard(list, requestPage, articleCount, totalPage, firstRow, endRow, beginPage, endPage);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return pageboard;
+	}
 
 	public BoardVO select(int idx, int boardid) {
 		BoardVO board = null;
@@ -170,43 +253,37 @@ public class BoardDAO implements DebateInter, FreeInter {
 	
 	public int delete(int idx, int boardid) {
 		int result = 0;
-		int commentResult = commentDelete(idx);
-		
-		if(commentResult == 1) {			
-			String sql = "delete from board where idx=? and boardid=?";
-			PreparedStatement pstmt = null;
+		commentDelete(idx);
+					
+		String sql = "delete from board where idx=? and boardid=?";
+		PreparedStatement pstmt = null;
 			
-			try{
-				pstmt = ds.getConnection().prepareStatement(sql);
-				pstmt.setInt(1, idx);
-				pstmt.setInt(2, boardid);
-				result=pstmt.executeUpdate();
-			} catch(Exception e) { 
-				e.printStackTrace();
-			}
-		} else {
-			
+		try{
+			pstmt = ds.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.setInt(2, boardid);
+			result=pstmt.executeUpdate();
+		} catch(Exception e) { 
+			e.printStackTrace();
 		}
 		return result;
 	}
 	
-	private int commentDelete(int idx) {
-		int result = 0;
-		
+	private void commentDelete(int idx) {
+
+
 		String sql = "delete from comment_board where pidx=?";
 		PreparedStatement pstmt = null;
 		
 		try{
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, idx);
-			result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 		} catch(Exception e) { 
 			e.printStackTrace();
-			System.out.println("댓글 없음.");
-			return 1;
+
 		}
 
-		return result;
 		
 	}
 

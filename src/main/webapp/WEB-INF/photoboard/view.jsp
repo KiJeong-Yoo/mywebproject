@@ -1,16 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<section>
-	<div class="photoview_con">
-		<p>${image.title}</p>
-		<span>${image.writeId}</span>
-		<span>${image.writeDay}</span>
-		<span>${image.readcount}</span>				
-		<img alt="" src="${image.content}">
-		
-		<div>
-			<a href="location.href='/photoboard/update'">수정</a>
-			<a href="location.href='/photoboard/delete'">삭제</a>
-		</div>
-	</div>
-</section>
+    
+<div class="container">   
+	<table class="table">
+	  <tr>
+	    <td> 제목 : ${image.title } </td>
+	  </tr>
+	    <tr>
+	    <td> 작성일 : ${image.writeDay } </td>
+	  </tr>
+	    <tr>
+	    <td> 조회 수 : ${image.readcount } </td>
+	  </tr>
+	    <tr>
+	    <td> 작성자 : ${image.writeId } </td>
+	  </tr>
+	  <tr>
+	  	<td>
+	  		<img alt="" src="${image.content}" class="content_img">
+	  	</td>
+	  </tr>
+	  
+	  <tfoot>
+	  	<tr>
+	  		<td>
+	  			<a href="/photoboard/update?idx=${image.idx}">수정</a>
+	  		</td>
+	  		<td>
+	  			<a href="/photoboard/delete?idx=${image.idx}&requestPage=${requestpage}">삭제</a>
+	  		</td>
+	  	</tr>
+	  </tfoot>
+	</table>
+</div>

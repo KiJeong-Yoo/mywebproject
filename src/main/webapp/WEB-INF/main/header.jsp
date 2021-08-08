@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-	<header class="container-fluid navbar-fixed-bottom">
+	<header>
 		<div id="logo_img">
 	        <a href="/index"><img src="/img/logo3.jpg" width="150px"></a>
 	    </div>

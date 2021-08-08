@@ -32,13 +32,13 @@ public class IndexController {
     	int request_Page = 1;
     	
     	
-		PageBoard pageboard = debateService.list(request_Page, boardid);
+		PageBoard pageboard = debateService.mainpagelist(request_Page, boardid);
     	mv.addObject("pageboard1", pageboard);
     	mv.addObject("requestPage", request_Page);
     	
     	boardid = 2; // 자유 게시판
     		    	
-    	pageboard = freeService.list(request_Page, boardid);
+    	pageboard = freeService.mainpagelist(request_Page, boardid);
     	mv.addObject("pageboard2", pageboard);
     	mv.addObject("requestPage", request_Page);       	
     	

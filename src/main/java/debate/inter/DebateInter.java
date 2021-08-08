@@ -23,5 +23,7 @@ public interface DebateInter {
 
 	int insert(BoardVO board);
 
+	PageBoard mainpagelist(int request_Page, int boardid);
+
 	
 }

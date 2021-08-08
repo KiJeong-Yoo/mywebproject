@@ -148,7 +148,11 @@ public class BoardVO {
 
 	@Override
 	public String toString() {
-		return "BoardVO [idx=" + idx + ", title=" + title + ", content=" + content + ", groupid=" + groupid + ", depth="
-				+ depth + ", reOrder=" + reOrder + "]";
-	}	
+		return "BoardVO [boardid=" + boardid + ", idx=" + idx + ", title=" + title + ", content=" + content
+				+ ", readcount=" + readcount + ", groupid=" + groupid + ", depth=" + depth + ", reOrder=" + reOrder
+				+ ", isdel=" + isdel + ", writeId=" + writeId + ", writeName=" + writeName + ", writeDay=" + writeDay
+				+ "]";
+	}
+
+	
 }

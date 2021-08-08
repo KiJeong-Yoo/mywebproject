@@ -55,7 +55,7 @@ public class ImageDao implements ImageInter {
 		return result;
 	}
 	
-	public int update(String title, String content, int idx) {
+	public int update(String title, String img, int idx) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = "update photoboard set title=?, content=? where idx=?";
@@ -63,7 +63,7 @@ public class ImageDao implements ImageInter {
 		try{
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setString(1, title);
-			pstmt.setString(2, content);
+			pstmt.setString(2, img);
 			pstmt.setInt(3, idx);
 			result = pstmt.executeUpdate();
 		} catch(Exception e) { 
@@ -239,7 +239,7 @@ public class ImageDao implements ImageInter {
 		if(endPage > totalPage) 
 			endPage = totalPage;		
 		
-		sql = "select * from photoboard order by idx desc"; 
+		sql = "select * from photoboard where title like "+ "'%" + title + "%'" + " order by idx desc"; 
 		
 		pstmt = ds.getConnection().prepareStatement(sql);
 		rs = pstmt.executeQuery();

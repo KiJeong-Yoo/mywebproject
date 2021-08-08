@@ -136,7 +136,7 @@ public class FreeController {
    			PageBoard pageboard = freeService.list(request_Page, boardid);
    			mv.addObject("pageboard", pageboard);
    			mv.addObject("requestPage", request_Page);
-   			mv.addObject("section", "/freeboard/debatemain.jsp");
+   			mv.addObject("section", "/freeboard/freemain.jsp");
    			mv.setViewName("/WEB-INF/index.jsp");
 		}		
 		return mv;
@@ -146,14 +146,14 @@ public class FreeController {
 	public ModelAndView delete(HttpServletRequest req, String idx, String requestPage, String writeid) {
 		HttpSession session = req.getSession();
 		ModelAndView mv = new ModelAndView();
+		String id = (String) session.getAttribute("login");
 		
 		if(session.getAttribute("login") == null) {
 			mv.addObject("section","/login/loginMain.jsp");
 	   		mv.setViewName("/WEB-INF/index.jsp");
 			return mv;
 		} else {
-			_requestPage = requestPage;
-			if(session.getAttribute("login").equals(writeid)) {
+			if(id.equals(writeid)) {
 				int dresult = freeService.delete(Integer.parseInt(idx), boardid);
 				
 				if(dresult == 1) {
@@ -166,17 +166,19 @@ public class FreeController {
 					PageBoard pageboard = freeService.list(request_Page, boardid);
 					mv.addObject("pageboard", pageboard);
 					mv.addObject("requestPage", request_Page);
-		   			mv.addObject("section", "/freeboard/debatemain.jsp");
+		   			mv.addObject("section", "/freeboard/freemain.jsp");
 		   			mv.setViewName("/WEB-INF/index.jsp");
+		   			return mv;
 				
 				}
 			} else {
 				BoardVO board = freeService.select(Integer.parseInt(idx), boardid);
 				mv.addObject("board", board);
 				mv.addObject("requestPage", _requestPage);
-				mv.addObject("id", "xx");
+//				mv.addObject("id", "xx");
 	   			mv.addObject("section", "/freeboard/read.jsp");
 	   			mv.setViewName("/WEB-INF/index.jsp");
+	   			return mv;
 			}
 		}
 		return mv;
@@ -283,7 +285,7 @@ public class FreeController {
 		ModelAndView mv = new ModelAndView();
 		BoardVO board = new BoardVO(boardid, title, content, writeName, writeName);
 		int iresult = freeService.insert(board);
-		
+		System.out.println(board.toString());
 		if(iresult == 1) {
 			PageBoard pageboard = freeService.list(1, boardid);
 			mv.addObject("pageboard", pageboard);

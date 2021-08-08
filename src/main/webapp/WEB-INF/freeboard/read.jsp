@@ -39,8 +39,8 @@
     <div class="form-group form-btn-group">
 		<button class="btn btn-light" onclick="location.href='/freeboard/freemain?requestPage=${requestPage}'">목록으로</button>
 		<button class="btn btn-light" onclick="location.href='/freeboard/reply?idx=${board.idx}&groupid=${board.groupid}&depth=${board.depth}&reOrder=${board.reOrder}&title=${board.title}&requestPage=${requestPage}'">답글쓰기</button>
-		<button class="btn btn-light" onclick="location.href='/freeboard/update?idx=${board.idx}&requestPage=${requestPage}'">글 수정</button>
-		<button class="btn btn-light" onclick="location.href='/freeboard/delete?idx=${board.idx}&requestPage=${requestPage}'">글 삭제</button>
+		<button class="btn btn-light" onclick="location.href='/freeboard/update?idx=${board.idx}&requestPage=${requestPage}&writeid=${board.writeName}'">글 수정</button>
+		<button class="btn btn-light" onclick="location.href='/freeboard/delete?idx=${board.idx}&requestPage=${requestPage}&writeid=${board.writeName}'">글 삭제</button>
 		
     	<form action="/comment/freecomment" method="get" onsubmit="return check()">
     		<input type="text" name="c_content" id="c_content" style="width: 100px; height: 40px;">

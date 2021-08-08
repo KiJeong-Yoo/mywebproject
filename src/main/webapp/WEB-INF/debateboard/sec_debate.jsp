@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section>
-	<div style="display: flex; justify-content: space-evenly; margin-top: 20px; padding: 0 20px;">
+	<div class="container" style="display: flex; justify-content: space-between; margin-top: 50px; padding: 0 20px;">
 		<div class="sec_debate_con">
 			<h2 class="sec_debate_h">토론 게시판</h2>
 			<hr>
@@ -38,6 +38,20 @@
 					</tr>
 				</c:forEach>
 			</table>
+		</div>
+		<div>
+		<div id="recommend_head">
+				<h2>축구 뉴스</h2>		
+			</div>
+			<div class="news_table">
+				<table class="table table-border">
+					<c:forEach items="${news}" var="news">
+						<tr>
+							<td><a href="/news/newscontent?aid=${news.aid}">${news.title}</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
 		</div>
 	</div>
 </section>

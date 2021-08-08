@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import image.dao.ImageInter;
 import image.vo.ImageVo;
@@ -31,12 +32,16 @@ public class ImageService {
 		return image.select(idx);
 	}
 
-	public int update(String title, String content, int idx) {
-		return image.update(title, content, idx);
+	public int update(String title, String img, int idx) {
+		return image.update(title, img, idx);
 	}
 
 	public int delete(int idx) {
 		return image.delete(idx);
+	}
+
+	public PageBoard searchlist(int request_page, String search) {
+		return image.searchlist(request_page, search);
 	}
 	
 	

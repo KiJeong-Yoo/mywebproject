@@ -47,5 +47,9 @@ public class DebateService {
 	public int insert(BoardVO board) {
 		return debate.insert(board);
 	}
+
+	public PageBoard mainpagelist(int request_Page, int boardid) {
+		return debate.mainpagelist(request_Page, boardid);
+	}
 	
 }

@@ -1,7 +1,5 @@
 package image.dao;
 
-import java.util.List;
-
 import image.vo.ImageVo;
 import image.vo.PageBoard;
 
@@ -15,8 +13,10 @@ public interface ImageInter {
 
 	ImageVo select(int idx);
 
-	int update(String title, String content, int idx);
+	int update(String title, String img, int idx);
 
 	int delete(int idx);
+
+	PageBoard searchlist(int request_page, String search);
 
 }

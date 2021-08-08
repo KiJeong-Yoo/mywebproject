@@ -148,7 +148,7 @@ $(function() {
 	})
 });
 </script>
-<%-- <c:if test="${id eq 'not equals'}">
+<c:if test="${id eq 'not equals'}">
 	<script>
 		alert("글쓴이만 수정이 가능 합니다.");
 	</script>
@@ -158,4 +158,4 @@ $(function() {
 	<script>
 		alert("글쓴이만 삭제가 가능 합니다.");
 	</script>
-</c:if> --%>
+</c:if>

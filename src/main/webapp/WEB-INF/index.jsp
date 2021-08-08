@@ -14,7 +14,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="${contextPath }js/bootstrap/bootstrap.js"></script>
 </head>
-<body class="pt-5">
+<body>
 <jsp:include page="/WEB-INF/main/header.jsp" flush="true"/>
 <jsp:include page="/WEB-INF/main/nav.jsp" flush="true" />
 <jsp:include page="/WEB-INF${section}" />

@@ -19,4 +19,6 @@ public interface FreeInter {
 	PageBoard searchlist(String field, String search, int request_Page, int parseInt);
 
 	int insert(BoardVO board);
+
+	PageBoard mainpagelist(int request_Page, int boardid);
 }
