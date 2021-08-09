@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section>
-<div class="container-xxl">
+<div class="container-xxl" style="height: 800px;">
 	<div>
 		<h2>VOTE THIS</h2>
 		

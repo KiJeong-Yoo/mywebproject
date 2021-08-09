@@ -122,13 +122,22 @@ public class CommentController {
 	}
 	
 	@RequestMapping("/creply")
-	public ModelAndView creply(String requestPage, String commentreply, String commentidx, String pidx, String groupid, String depth, String reOrder, String writeid, String boardid) {
+	public ModelAndView creply(HttpServletRequest req,String requestPage, String commentreply, String commentidx, String pidx, String groupid, String depth, String reOrder, String writeid, String boardid) {
 		ModelAndView mv = new ModelAndView();
+		HttpSession session = req.getSession();
 		BoardVO board = null;
+		if(session.getAttribute("login") == null) {
+			mv.addObject("section","/login/loginMain.jsp");
+	   		mv.setViewName("/WEB-INF/index.jsp");
+			return mv;
+		}
+		
 		
 		CommentVo comment = new CommentVo(Integer.parseInt(commentidx), Integer.parseInt(pidx), commentreply, Integer.parseInt(groupid), (Integer.parseInt(depth) + 1), (Integer.parseInt(reOrder) + 1), writeid);
 		request_Page = Integer.parseInt(requestPage);
 		int boardnumber = Integer.parseInt(boardid);
+		
+		
 		int rresult = commentService.replyInsert(comment);
 
 		if(rresult == 1) {
@@ -153,49 +162,60 @@ public class CommentController {
    			mv.addObject("requestPage", request_Page);		
 			mv.setViewName("/WEB-INF/index.jsp");
 			
-		} /*
-			 * else { CPageBoard cpb = commentService.list(request_Page,
-			 * Integer.parseInt(pidx)); board = freeService.select(Integer.parseInt(pidx),
-			 * 2); mv.addObject("board", board); mv.addObject("cboard", cpb);
-			 * mv.addObject("requestPage", request_Page); mv.addObject("section",
-			 * "/freeboard/read.jsp"); mv.setViewName("/WEB-INF/index.jsp"); }
-			 */
+		} 
 		return mv;
 	}
 	
 	@RequestMapping("/cdelete")
-	public ModelAndView delete(String requestPage, String groupid, String pidx, String reorder, String boardid) {
+	public ModelAndView delete(HttpServletRequest req, String requestPage, String writeid, String groupid, String pidx, String reorder, String boardid) {
 		ModelAndView mv = new ModelAndView();
+		HttpSession session = req.getSession();
 		BoardVO board = null;
 		int boardnumber = Integer.parseInt(boardid);
-		int dresult = commentService.delete(Integer.parseInt(groupid), Integer.parseInt(reorder));
-		if(dresult == 1)
-			System.out.println("delete success");
-		
-		CPageBoard cpb = commentService.list(request_Page, Integer.parseInt(pidx));
-		
-		if(boardnumber == 1) {
-				board = debateService.select(Integer.parseInt(pidx), boardnumber);
-				mv.addObject("section", "/debateboard/read.jsp");
-			} else {
-				board = freeService.select(Integer.parseInt(pidx), boardnumber);  
-				mv.addObject("section", "/freeboard/read.jsp");
+		if(session.getAttribute("login") == null) {
+			mv.addObject("section","/login/loginMain.jsp");
+	   		mv.setViewName("/WEB-INF/index.jsp");
+			return mv;
+		} else {
+			if(session.getAttribute("login").equals(writeid)) {
+				int dresult = commentService.delete(Integer.parseInt(groupid), Integer.parseInt(reorder));
+				if(dresult == 1)
+					System.out.println("delete success");
+				
+				CPageBoard cpb = commentService.list(request_Page, Integer.parseInt(pidx));
+				
+				if(boardnumber == 1) {
+					board = debateService.select(Integer.parseInt(pidx), boardnumber);
+					mv.addObject("section", "/debateboard/read.jsp");
+				} else {
+					board = freeService.select(Integer.parseInt(pidx), boardnumber);  
+					mv.addObject("section", "/freeboard/read.jsp");
+				}
+				mv.addObject("board", board);
+				mv.addObject("cboard", cpb);
+				mv.addObject("requestPage", Integer.parseInt(requestPage));
+				mv.addObject("section", "/freeboard/read.jsp");			
+				mv.setViewName("/WEB-INF/index.jsp");				
 			}
+		}
 			
-		mv.addObject("board", board);
-		mv.addObject("cboard", cpb);
-		mv.addObject("requestPage", Integer.parseInt(requestPage));
-		mv.addObject("section", "/freeboard/read.jsp");			
-		mv.setViewName("/WEB-INF/index.jsp");
 		return mv;
 	}
 	
 	@RequestMapping("/cupdate")
-	public ModelAndView update(String requestPage, String groupid, String pidx, String reorder, String boardid) {
+	public ModelAndView update(HttpServletRequest req, String requestPage, String groupid, String pidx, String reorder, String boardid, String writeid, String idx) {
 		ModelAndView mv = new ModelAndView();
+		HttpSession session = req.getSession();
+		
 		BoardVO board = null;
 		int boardnumber = Integer.parseInt(boardid);
-		int dresult = commentService.delete(Integer.parseInt(groupid), Integer.parseInt(reorder));
+		
+		if(session.getAttribute("login") == null) {
+			mv.addObject("section","/login/loginMain.jsp");
+	   		mv.setViewName("/WEB-INF/index.jsp");
+			return mv;
+		}
+		int dresult = commentService.update(Integer.parseInt(idx), Integer.parseInt(reorder));
 		if(dresult == 1)
 			System.out.println("delete success");
 		

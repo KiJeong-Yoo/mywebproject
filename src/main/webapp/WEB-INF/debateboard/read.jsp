@@ -60,7 +60,7 @@
 	</div>   
 	<!-- comment -->
 <c:if test="${fn:length(cboard.list) > 0 }">
-    <div class="comment_table container">
+    <div class="comment_table h-100">
 	 	<table class="table">
 			<tr class="success">
 				<th>내용</th>
@@ -73,12 +73,14 @@
 						<td>
 							<c:forEach begin="1" end="${clist.depth}">&nbsp;&nbsp;&nbsp;</c:forEach>
 							<img style="width:42px;height:15px" src="/img/reply_icon.gif"/>
+							${clist.content}
 						</td>
 					</c:if>
+					<c:if test="${clist.depth == 0}">	
 					<td>${clist.content}</td>
+					</c:if>
 					<td>${clist.writeid}</td>
 					<td>${clist.writedate}</td>
-					<td><a id="${status.index}" class="on">답글쓰기</a></td>
 				</tr>
 				<tr>
 					<td id="${status.index}" class="comment_reply_div_${status.index}" style="display: none;">
@@ -101,18 +103,19 @@
 							</form>
 						</div>
 					</td>
+					<td><a id="${status.index}" class="on">답글쓰기</a></td>
 					<td>
-						<button class="btn btn-light"  onclick="location.href='/comment/cupdate?idx=${clist.commentidx}&requestPage=${requestPage}&pidx=${board.idx}&boardid=1'">댓글 수정</button>
+						<button class="btn btn-light"  onclick="location.href='/comment/cupdate?idx=${clist.commentidx}&requestPage=${requestPage}&pidx=${board.idx}&boardid=1&writeid=${clist.writeid}'">댓글 수정</button>
 					</td>
 					<td>
-						<button class="btn btn-light"  onclick="location.href='/comment/cdelete?requestPage=${requestPage}&groupid=${clist.groupid}&pidx=${board.idx}&reorder=${clist.reOrder}&boardid=1'">댓글 삭제</button>
+						<button class="btn btn-light"  onclick="location.href='/comment/cdelete?requestPage=${requestPage}&groupid=${clist.groupid}&pidx=${board.idx}&reorder=${clist.reOrder}&boardid=1&writeid=${clist.writeid}'">댓글 삭제</button>
 					</td>
 				</tr>
 			</c:forEach>
 			<!-- page list -->
 			<tr>
 				<td colspan=4 align=center valign="center">
-					<ul class="pagination">			   
+					<ul class="pagination" style="display:flex; margin-top: 20px; text-align: center; font-size: 0; justify-content: center; align-items: center;">			   
 					    <c:if test="${cboard.beginPage > 5}">
 					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${cboard.beginPage - 5}&pidx=${board.idx}&boardid=1">이전페이지</a></li>
 					    </c:if>

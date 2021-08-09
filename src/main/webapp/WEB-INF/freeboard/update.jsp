@@ -18,7 +18,7 @@
 	<input type="submit" value="글 수정">
 	<button onclick="location.href='/freeboard/freemain?requestPage=${requestPage}'">수정취소하기</button>
 	</div>
-	<input type="text" name="idx" value="${board.idx}" hidden>
-	<input type="text" name="requestPage" value="${reuqestPage}" hidden>
+	<input type="hidden" name="idx" value="${board.idx}">
+	<input type="hidden" name="requestPage" value="${reuqestPage}">
  </form>
 </div>

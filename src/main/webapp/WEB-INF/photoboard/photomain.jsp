@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jstl.jsp" %>
 <section>
-<div class="container-fluid">
+<div class="container" style="height: 1400px;">
 	<div class="boardname">
 		<h2><button class="btn" onclick="location.href='/index'"><i class="fa fa-home"></i></button>포토 게시판</h2>
 	</div>
@@ -55,8 +55,20 @@
 			    	</li>
 			    </c:if>	    
 			 </ul>
-			<button class="btn btn-primary" onclick="location.href='/photoboard/write'">글쓰기</button>
+			<!-- <button class="btn btn-primary" onclick="location.href='/photoboard/write'">글쓰기</button> -->
+			<button class="btn btn-primary" onclick="check()">글쓰기</button>
 			
 		</div>
 	</div>
 </section>
+<script>
+	let id = "<c:out value='${login}' />"
+	function check() {
+		
+		if(id == '') {
+			location.href = '/login/loginMain';
+		} else {
+			location.href = '/photoboard/write';
+		}
+	}
+</script>
