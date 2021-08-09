@@ -14,23 +14,23 @@
 </c:if>
 
 <section>
-	<div id="container">       
-	       <div id="log_con">
+	<div class="container">       
+	       <div id="log_con" style="margin: 0;">
 	           <div id="h_con">
-	               <span>풋살을 즐기며 소통하자</span><br>
-	               <span class="logo_h1">풋볼데이</span>
+	               <span style="font-size: 30px; font-weight: 400;">풋살을 즐기며 소통하자</span><br>
+	               <span class="logo_h1" style="font-size: 30px; font-weight: 400;">풋볼데이</span>
 	           </div>
 	           <div id="form_con">
 	               <form action="/login/login.do" method="post" onsubmit="return check()">
 	                   <table>
 	                       <tr class="login_tr">
-	                           <td class="login_td"><input type="text" name="id" id="id" placeholder="아이디" value="test1"><br/></td>
+	                           <td class="login_td"><input type="text" name="id" id="id" placeholder="아이디" value="test1" style="width: 250px; height: 30px;"><br/></td>
 	                       </tr>
 	                       <tr class="login_tr">
-	                           <td class="login_td"><input type="password" name="pw" id="pw" placeholder="비밀번호" value="1111111111"><br/></td>
+	                           <td class="login_td"><input type="password" name="pw" id="pw" placeholder="비밀번호" value="1111111111"style="width: 250px; height: 30px;"><br/></td>
 	                       </tr>
 	                       <tr class="login_tr">
-	                           <td class="login_td"><input type="submit" value="로그인" class="submit_btn"></td>
+	                           <td class="login_td"><input type="submit" value="로그인" class="submit_btn" style="width: 250px; height: 30px;"></td>
 	                       </tr>
 	                   </table>
 	               </form>

@@ -5,7 +5,7 @@
 <div class="container-md">
 		<div class="form-group">
 			<div style="margin-left: 15px">
-				<span style="font-weight: 700">뉴스 검색</span>
+				<span style="font-weight: 700; font-size: 30px;">뉴스 검색</span>
 			</div>
 			<form action="/news/search" method="get" onsubmit="return check()">
 			<div class="form-group search">
@@ -22,8 +22,7 @@
 	
 		<div id="news_recommend">
 			<div id="recommend_head" style="padding: 10px;">
-				<span style="font-size: 30px; font-weight:900;">추천 뉴스</span>
-				<a href="/news/recommend" style="padding-left: 30px; text-decoration: none; color:black;">더보기</a>			
+				<span style="font-size: 30px; font-weight:900;">추천 뉴스</span>		
 			</div>
 			<div class="news_ul">
 				<ul class="list-group">

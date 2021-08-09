@@ -24,10 +24,10 @@
 	  <tfoot>
 	  	<tr>
 	  		<td>
-	  			<a href="/photoboard/update?idx=${image.idx}">수정</a>
+	  			<a href="/photoboard/update?idx=${image.idx}&title=${image.title}">수정</a>
 	  		</td>
 	  		<td>
-	  			<a href="/photoboard/delete?idx=${image.idx}&requestPage=${requestpage}">삭제</a>
+	  			<a href="/photoboard/delete?idx=${image.idx}&requestPage=1">삭제</a>
 	  		</td>
 	  	</tr>
 	  </tfoot>

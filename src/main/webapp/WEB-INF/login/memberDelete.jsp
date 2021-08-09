@@ -1,20 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<section>
-	<div class="info_container">
+
+	<div class="container info_con">
+	<section>
 		 <div id="info_con">
             <div id="title_con">
-                <span class="span_color">회원 탈퇴ㅜㅜ</span>
+                <span class="span_color">회원 탈퇴</span>
+                
             </div>
             <div id="info_form">
                 <form action="/login/memberdelete.do" method="post" onsubmit="return check()">
-                    <table id="info_tbl">
+                <hr>
+                    <table id="table">
                         <tr class="info_tr">
                             <td class="info_td">아이디</td>
                             <td class="info_td">
 	                            <input class="infotext" type="text" name="deleteId" id="deleteId">
                             </td>
-                            <hr>
                         </tr>
                         <tr class="info_tr">
                             <td class="info_td">이름</td>
@@ -52,8 +54,9 @@
                 </form>
             </div>
         </div>
+        </section>
     </div>
-</section>
+
 <script>
 	if(${msg} != null) {
 		alert(${msg});			

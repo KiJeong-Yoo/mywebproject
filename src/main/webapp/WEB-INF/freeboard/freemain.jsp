@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <section>
-	<div class="container">
+	<div class="container-xxl">
 		<h2><button class="btn" onclick="location.href='/index'"><i class="fa fa-home"></i></button>자유 게시판</h2>
 		<!-- 검색리스트 -->
 		<form name="form" action="/freeboard/searchList" method="post">

@@ -67,7 +67,7 @@ public class Crawling {
 			News news = new News();
 			news.setAddress(address);
 			news.setTitle(title.text());
-			news.setContent(content.text());			
+			news.setContent(System.lineSeparator() + content.html());			
 			news.setDate(sdate);
 			news.setAid(aid[1]);
 			news.setImg(imgsrc);

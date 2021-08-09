@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section>
-<div class="container">
+<div class="container-xxl">
 	<div>
 		<h2>VOTE THIS</h2>
 		
@@ -31,16 +31,16 @@
 					<tr>
 						<td width="150">
 							<c:if test="${plvo.active == 1}">
-								<input type="submit" value="투표">
+								<input class="btn btn-primary" type="submit" value="투표">
 							</c:if>
 							<c:if test="${plvo.active != 1}">
 								투표종료
 							</c:if>
 						</td>
 						<td width="150">
-							<input class="btn" type="button" value="결과" 
-							onclick="javascript:window.open('/vote/pollview?num=${voteCount}'
-							,'pollview','width=650, height=550')">
+							<input class="btn btn-primary" type="button" value="결과" 
+							onclick="javascript:window.open('/vote/pollview?num=${voteCount}&listnum=${plvo.num}'
+							,'pollview','width=650, height=550')" style="float:right;">
 						</td>
 					</tr>
 				</table>
@@ -49,7 +49,6 @@
 	</div>
 	<div align="center">
 		<br/>		
-		<hr width="60%"/>
 		<b style="font-family:d2coding; font-size:15pt;">VOTE LIST</b>
 		<table>
 			<tr>
@@ -72,7 +71,7 @@
 			</tr>
 			<tr>
 				<td align="center">
-					<a href="/vote/pollInsert">설문작성하기</a>
+					<button class="btn btn-primary" onclick="location.href='/vote/pollInsert'">설문작성하기</button>
 				</td>
 			</tr>
 		</table>

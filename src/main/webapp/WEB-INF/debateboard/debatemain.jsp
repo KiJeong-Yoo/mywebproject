@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/jstl.jsp" %>
 
 <section>
-	<div class="container">
+	<div class="container-xxl">
 		<h2><button class="btn" onclick="location.href='/index'"><i class="fa fa-home"></i></button>토론 게시판</h2>
 		<!-- 검색리스트 -->
 		<form name="form" action="/debateboard/searchList" method="post">

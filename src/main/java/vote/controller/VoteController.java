@@ -113,32 +113,35 @@ public class VoteController {
 	}
 	
 	@RequestMapping("pollview")
-	public ModelAndView view(String num) {
+	public ModelAndView view(String num, String listnum) {
 		ModelAndView mv = new ModelAndView();
 		Random r = new Random();
 		int view_num = Integer.parseInt(num);
-		
-		PollListVo plvo = voteService.getPollRead(view_num);
+		int list_num = Integer.parseInt(listnum);
+		PollListVo plvo = voteService.getPollRead(list_num);
 		PollItemVo pivo = new PollItemVo();
-		int count = pivo.getCount();
+		int count = view_num;
 		
-		Vector<PollItemVo> vlist = voteService.getView(view_num);
-		Vector<String> item = voteService.getItem(view_num);
+		Vector<PollItemVo> vlist = voteService.getView(list_num);
+		Vector<String> item = voteService.getItem(list_num);
 		
-		int sumCnt = voteService.sumCount(view_num);
-		int maxCnt = voteService.getMaxcount(view_num);	
-		int ratio = (int)(Math.round((double)count/sumCnt*100));
+		int sumCnt = voteService.sumCount(list_num);
+		int maxCnt = voteService.getMaxcount(list_num);
+		int ratio[] = new int[vlist.size()];
+
+		for(int i=0; i<vlist.size(); i++) 
+			ratio[i] = (int)(Math.round((double)vlist.get(i).getCount()/sumCnt*100));
+
 		String rgb = "#"+ Integer.toHexString(r.nextInt(255*255*255));
-		System.out.println(ratio);
-		
-		mv.addObject("plvo", plvo);
-		mv.addObject("item", item);
-		mv.addObject("vlist", vlist);
-		mv.addObject("count", count);
-		mv.addObject("ratio", ratio);
-		mv.addObject("rgb", rgb);
-		mv.addObject("sumCnt", sumCnt);
-		mv.addObject("maxCnt", maxCnt);
+				
+		mv.addObject("plvo2", plvo);		
+		mv.addObject("item2", item);
+		mv.addObject("vlist2", vlist);
+		mv.addObject("count2", count);
+		mv.addObject("ratio2", ratio);
+		mv.addObject("rgb2", rgb);
+		mv.addObject("sumCnt2", sumCnt);
+		mv.addObject("maxCnt2", maxCnt);
 		mv.setViewName("/WEB-INF/vote/pollView.jsp");
 		return mv;
 	}

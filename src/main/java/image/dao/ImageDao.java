@@ -125,7 +125,7 @@ public class ImageDao implements ImageInter {
 		int firstRow = 0;   // 시작 글번호 - 요청 페이지 기준
 		int endRow = 0;     // 끝 글번호 - 요청 페이지 기준
 		int articleCount = 0; // 전체 글 수
-		int countPerPage = 10; // 페이지 당 표시될 글의 수
+		int countPerPage = 5; // 페이지 당 표시될 글의 수
 		
 		List<ImageVo> list = new ArrayList<ImageVo>(); // 페이지에 대한 10개의 글 리스트
 		
@@ -199,7 +199,7 @@ public class ImageDao implements ImageInter {
 		int firstRow = 0;   // 시작 글번호 - 요청 페이지 기준
 		int endRow = 0;     // 끝 글번호 - 요청 페이지 기준
 		int articleCount = 0; // 전체 글 수
-		int countPerPage = 10; // 페이지 당 표시될 글의 수
+		int countPerPage = 5; // 페이지 당 표시될 글의 수
 		
 		List<ImageVo> list = new ArrayList<ImageVo>(); // 페이지에 대한 10개의 글 리스트
 		

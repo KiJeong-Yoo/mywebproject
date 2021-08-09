@@ -14,28 +14,28 @@
                 <div>
                     <label for="slide04" class="left"></label>
                     <label for="slide02" class="right"></label>
-                    <a><img src="http://placehold.it/1000x300"></a>
+                    <a><img src="/img/fff.jpg"></a>
                 </div>
             </li>
             <li class="slideitem">
                 <div>
                     <label for="slide01" class="left"></label>
                     <label for="slide03" class="right"></label>
-                    <a><img src="http://placehold.it/1000x300"></a>
+                    <a><img src="/img/asdascxz.jpg"></a>
                 </div>
             </li>
             <li class="slideitem">
                 <div>
                     <label for="slide02" class="left"></label>
                     <label for="slide04" class="right"></label>
-                    <a><img src="http://placehold.it/1000x300"></a>
+                    <a><img src="/img/12312.jpg"></a>
                 </div>
             </li>
             <li class="slideitem">
                 <div>
                     <label for="slide03" class="left"></label>
                     <label for="slide01" class="right"></label>
-                    <a><img src="http://placehold.it/1000x300"></a>
+                    <a><img src="/img/qweasd.jpg"></a>
                 </div>
             </li>
         </ul>
@@ -175,6 +175,9 @@
     <!-- 게시판 -->
    <div id="board_con">
 		<jsp:include page="/WEB-INF/debateboard/sec_debate.jsp" />
+    </div>
+    <div>
+    	<jsp:include page="/WEB-INF/news/mainrandom.jsp" />
     </div>
     </div>        
 </section>

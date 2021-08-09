@@ -16,6 +16,7 @@ body {
 	position: relative;
     margin: 0 auto;
     width: 100%; 
+    height: 100%;
 }
 
 #container {
@@ -35,11 +36,13 @@ header {
 
 #logo_img {
     margin: 10px;
+    margin-left: 200px;
 }
 
 #header_login {
     margin: 20px;
     font-size: 1em;
+    margin-right: 200px;
 }
 
 #header_login > span {
@@ -60,6 +63,7 @@ header {
     margin-top: 20px;
     width: 100%;
     height: 100px;
+    margin-left: 200px;
 }
 
 .main_menu_ul {
@@ -148,6 +152,9 @@ header {
 }
 
 .weathericon {
+	font-size: 40px;
+    color: #4d4c4c;
+    font-weight: 100;
   position: relative;
   width: 50px;
   height: 50px;
@@ -158,6 +165,9 @@ header {
 }
 
 .sun {
+	font-size: 40px;
+    color: #4d4c4c;
+    font-weight: 100;
   background: #FFCD41;
   border-radius: 50%;
   box-shadow: rgba(255, 255, 0, 0.1) 0 0 0 4px;
@@ -183,6 +193,9 @@ header {
   }
 }
 .cloud {
+	font-size: 40px;
+    color: #4d4c4c;
+    font-weight: 100;
   margin-right: 60px;
   background: #e1e1e1;
   border-radius: 20px;
@@ -191,6 +204,9 @@ header {
   box-shadow: #e1e1e1 24px -6px 0 2px, #e1e1e1 10px 5px 0 5px, #e1e1e1 30px 5px 0 2px, #e1e1e1 11px -8px 0 -3px, #e1e1e1 25px 11px 0 -1px;
 }
 .cloud:after {
+	font-size: 40px;
+    color: #4d4c4c;
+    font-weight: 100;
   content: "";
   position: absolute;
   border-radius: 10px;
@@ -400,6 +416,7 @@ header {
             98% {left:100%;}
             100% {left:0%;}
         }
+        
 #slide_con {
     margin-top: 40px;
     display: flex;
@@ -413,8 +430,7 @@ header {
 	flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 100px;
-    height: 800px;
+    height: 500px;
     margin-bottom: 20px;
 }
 
@@ -432,13 +448,6 @@ header {
     margin-top: 40px;
 }
 
-/* input {
-    width: 400px;
-    height: 50px;
-    font-size: 20px;
-    border-radius: 0.2rem;
-    border: 1px solid lightgray;
-} */
 
 .join_a {
     text-decoration: none;
@@ -544,12 +553,16 @@ header {
     color: #2962ff;
 }
 
+#title_con {
+	text-align: center;
+}
+
 #title_con > span {
     font-size: 30px;
 }
 
 /* 개인정보수정 css */
-#info_container {
+.info_container {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -557,8 +570,14 @@ header {
     align-items: center;
 }
 
+#info_form {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #info_con {
-    margin-top: 60px;
+    margin-top: 30px;
 }
 
 #info_tbl {
@@ -567,7 +586,6 @@ header {
 
 .info_td {
     padding: 15px;
-    text-align: left;
 }
 
 .infotext {
@@ -779,7 +797,7 @@ a {
 
  */
 .search{
- 	margin: 50px;
+ 	margin: 35px;
  }
 .search input[type=text]{
 	width: 500px;
@@ -797,8 +815,7 @@ a {
 
 .content_img{
 	width: 350px;
-	height:350px; 
-	
+	height: 350px; 	
 }
 
 

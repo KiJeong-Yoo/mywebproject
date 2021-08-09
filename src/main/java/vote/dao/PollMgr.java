@@ -102,10 +102,10 @@ public class PollMgr implements PollInter {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				plvo.setNum(rs.getInt(1));
-				plvo.setQuestion(rs.getString(2));
-				plvo.setType(rs.getInt(3));
-				plvo.setActive(rs.getInt(4));
+				plvo.setNum(rs.getInt("num"));
+				plvo.setQuestion(rs.getString("question"));
+				plvo.setType(rs.getInt("type"));
+				plvo.setActive(rs.getInt("active"));
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

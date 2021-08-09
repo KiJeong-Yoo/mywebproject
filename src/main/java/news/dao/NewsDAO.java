@@ -151,35 +151,6 @@ public class NewsDAO implements NewsInter {
 		return list;
 	}
 	
-	// 더보기 누르기 전에 보여줄 약간의 기사 목록 (추천 뉴스)
-	public List<News> recommendRandom() {
-		List<News> list = new ArrayList<>();
-
-		String sql = "";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			sql = "select * from (select * from news order by dbms_random.value) where rownum <= 10";
-			pstmt = ds.getConnection().prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				News vo = new News();
-				vo.setId(rs.getInt("id"));
-				vo.setTitle(rs.getString("title"));
-				vo.setContent(rs.getString("content"));
-				vo.setDate(rs.getDate("newsdate"));
-				vo.setAid(rs.getString("aid"));
-				vo.setImg(rs.getString("img"));
-				list.add(vo);
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
 	// main 화면에 보여줄 뉴스기사
 	public List<News> mainRandom() {
 		List<News> list = new ArrayList<>();
@@ -189,7 +160,7 @@ public class NewsDAO implements NewsInter {
 		ResultSet rs = null;
 		
 		try {
-			sql = "select * from (select * from news order by dbms_random.value) where rownum <= 5";
+			sql = "select * from (select * from news order by dbms_random.value) where rownum <= 10";
 			pstmt = ds.getConnection().prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			

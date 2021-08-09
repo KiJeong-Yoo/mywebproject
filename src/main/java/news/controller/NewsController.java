@@ -21,23 +21,11 @@ public class NewsController {
 	public ModelAndView main() {
 		ModelAndView mv= new ModelAndView();
 		
-		List<News> recommend_list = newsService.recommendRandom();
+		List<News> recommend_list = newsService.mainRandom();
 		List<News> top_list = newsService.topcount();
 		mv.addObject("news", recommend_list);
 		mv.addObject("topnews", top_list);
 		mv.addObject("section", "/news/newsmain.jsp");
-		mv.setViewName("/WEB-INF/index.jsp");
-		return mv;
-	}
-	
-	@RequestMapping("recommend")
-	public ModelAndView recommend() {
-		ModelAndView mv= new ModelAndView();
-		List<News> all_list = newsService.print();
-		List<News> top_list = newsService.topcount();
-		mv.addObject("topnews", top_list);
-		mv.addObject("news", all_list);
-		mv.addObject("section", "/news/newsrecommend.jsp");
 		mv.setViewName("/WEB-INF/index.jsp");
 		return mv;
 	}

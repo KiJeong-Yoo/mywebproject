@@ -1,9 +1,5 @@
 package news.dao;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import news.crawling.Crawling;
 import news.crawling.Utils;
 import news.vo.News;

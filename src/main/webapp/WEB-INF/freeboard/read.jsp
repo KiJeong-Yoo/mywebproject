@@ -42,14 +42,27 @@
 		<button class="btn btn-light" onclick="location.href='/freeboard/update?idx=${board.idx}&requestPage=${requestPage}&writeid=${board.writeName}'">글 수정</button>
 		<button class="btn btn-light" onclick="location.href='/freeboard/delete?idx=${board.idx}&requestPage=${requestPage}&writeid=${board.writeName}'">글 삭제</button>
 		
-    	<form action="/comment/freecomment" method="get" onsubmit="return check()">
+    	<%-- <form action="/comment/freecomment" method="get" onsubmit="return check()">
     		<input type="text" name="c_content" id="c_content" style="width: 100px; height: 40px;">
     		<input type="hidden" name="pidx" value="${board.idx}">
     		<input type="hidden" name="cwriteid" value="${login}">
     		<input type="hidden" name="crequestPage" value="${requestPage}">
     		<input type="submit" value="댓글 달기">
-		</form>
+		</form> --%>
     </div>
+    <div class="form-group form-btn-group" style="float: left; margin: 15px; display:flex;">
+ 		<form action="/comment/freecomment" method="post" onsubmit="return check()">
+ 			<div class="col-xs-6">
+    			<input class="form-control" type="text" name="c_content" id="c_content" placeholder="댓글을 입력해주세요.">
+    		</div>
+    		<input type="hidden" name="pidx" value="${board.idx}">
+    		<input type="hidden" name="cwriteid" value="${login}">
+    		<input type="hidden" name="crequestPage" value="${requestPage}">
+    		<div class="col-xs-2">
+    			<input class="form-control" type="submit" value="댓글 달기">
+    		</div>
+		</form>
+	</div>
     <!-- comment -->
     <c:if test="${fn:length(cboard.list) > 0 }">
     <div class="comment_table">

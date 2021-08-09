@@ -28,14 +28,14 @@ public class ImageController {
 	
 	
 //	private final String UPLOAD_PATH = "/Users/yjw8459/git/mywebproject/src/main/webapp/attachment";
-	private final String UPLOAD_PATH = "C:/Users/syace/git/mywebproject/src/main/webapp/attachment";
+	private final String UPLOAD_PATH = "C:/Users/admin/git/mywebproject/src/main/webapp/attachment";
 	private final String LOAD_PATH = "/attachment";
 	
 	//메인화면
 	@RequestMapping("photomain")
 	public ModelAndView main(HttpServletRequest req, String requestPage) {
 		HttpSession session = req.getSession();
-		session.setAttribute("uploadPath", req.getRealPath("/"));
+		session.setAttribute("uploadPath", UPLOAD_PATH+"/");
 		ModelAndView mv = new ModelAndView();
 
 		if(requestPage != null)
@@ -122,8 +122,7 @@ public class ImageController {
 	public ModelAndView update(String title, String content, String idx) {
 		ModelAndView mv = new ModelAndView();
 		ImageVo image = imageService.select(Integer.parseInt(idx));
-
-		mv.addObject("iamge", image);
+		mv.addObject("image", image);
 		mv.addObject("section", "/photoboard/update.jsp");
 		mv.setViewName("/WEB-INF/index.jsp");
 		return mv;
@@ -149,12 +148,11 @@ public class ImageController {
 			e.printStackTrace();
 		}
         String img = LOAD_PATH + "/" + storedFileName;
-        System.out.println(title);
-        System.out.println(img);
+
         imageService.update(title, img, Integer.parseInt(idx));		
 		ImageVo image = imageService.select(Integer.parseInt(idx));
 		
-		mv.addObject("iamge", image);
+		mv.addObject("image", image);
 		mv.addObject("section", "/photoboard/view.jsp");
 		mv.setViewName("/WEB-INF/index.jsp");
 		return mv;
@@ -166,7 +164,7 @@ public class ImageController {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = imageService.delete(Integer.parseInt(idx));
-		System.out.println(result);
+
 		PageBoard pageboard = imageService.list(Integer.parseInt(requestPage)); 
 		
 		if(requestPage != null)

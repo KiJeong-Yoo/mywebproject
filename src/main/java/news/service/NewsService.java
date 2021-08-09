@@ -12,10 +12,6 @@ public class NewsService {
 	@Autowired
 	NewsInter news;
 
-	public List<News> recommendRandom() {
-		return news.recommendRandom();
-	}
-
 	public List<News> topcount() {
 		return news.topcount();
 	}
@@ -39,7 +35,6 @@ public class NewsService {
 
 	public List<News> mainRandom() {
 		return news.mainRandom();
-	}
-	
+	}	
 	
 }

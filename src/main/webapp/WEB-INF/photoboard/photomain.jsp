@@ -2,23 +2,40 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jstl.jsp" %>
 <section>
-<div class="container">
-	<div class="photomain_con">
+<div class="container-fluid">
+	<div class="boardname">
+		<h2><button class="btn" onclick="location.href='/index'"><i class="fa fa-home"></i></button>포토 게시판</h2>
+	</div>
+	<div class="searchgroup">
 		<form action="/photoboard/search">
-			<input type="text" name="search">
-			<input type="submit" value="검색">
+			<div class="form-group search">
+				<div class="col-xs-6">
+					<input class="form-control" type="text" name="search" placeholder="검색할 내용을 입력하세요.">
+				</div>
+				<div class="col-xs-2">
+					<input class="form-control" type="submit" value="검색">
+				</div>
+			</div>
 		</form>
-
+		<table class="table">
+			<tr>
+				<th>제목</th>
+				<th>이미지</th>
+			</tr>
 			<c:forEach var="list" items="${pageboard.list}">
-				<a href="/photoboard/view?idx=${list.idx}&requestPage=${pageboard.requestPage}">
-				${list.title}
-				</a>
-				<a href="/photoboard/view?idx=${list.idx}&requestPage=${pageboard.requestPage}">
-					<img alt="" src="${list.content}" style="width:250px;height:250px;vertical-align:middle;">
-					<!-- <img alt="" src="/attachment/d7890edecf1f49ba87c5a4a9571d5f0a.png" style="width:400px;height:400px;vertical-align:middle;"> -->
-					<%-- <img alt="" src="/photoboard/getImg.do?fileNM=${list.content}" style="width:400px;height:400px;vertical-align:middle;"> --%>
-				</a>
+			<tr>
+				<td>
+					<a href="/photoboard/view?idx=${list.idx}&requestPage=${pageboard.requestPage}">
+				${list.title}</a>
+				</td>
+				<td>
+					<a href="/photoboard/view?idx=${list.idx}&requestPage=${pageboard.requestPage}">
+					<img class="img-thumbnail"  alt="" src="${list.content}" style="width:200px;height:200px;vertical-align:middle;"></a>
+					
+				</td>
+			</tr>
 			</c:forEach>
+		</table>
 			<ul class="pagination" style="display:flex; margin-top: 20px; text-align: center; font-size: 0; justify-content: center; align-items: center;">	   
 			    <c:if test="${pageboard.beginPage > 5}">
 			    	<li class="page-item">
@@ -38,8 +55,8 @@
 			    	</li>
 			    </c:if>	    
 			 </ul>
-			<button class="btn" onclick="location.href='/photoboard/write'">글쓰기</button>
-
-	</div>
+			<button class="btn btn-primary" onclick="location.href='/photoboard/write'">글쓰기</button>
+			
+		</div>
 	</div>
 </section>
