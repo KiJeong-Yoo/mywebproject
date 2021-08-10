@@ -24,7 +24,8 @@
 			    </div>
 		    </div>
 		 </form>
-		<!-- 검색리스트  -->
+		 
+		<!-- 게시판 글 리스트  -->
 		<div class="board_list_wrap">
 			<table class="border_list table">
 			
@@ -50,6 +51,7 @@
 					</tr>
 				</c:forEach>
 			</table>
+			<!-- 페이지 선택 -->
 			<ul class="pagination" style="display:flex; margin-top: 20px; text-align: center; font-size: 0; justify-content: center; align-items: center;">	   
 			    <c:if test="${pageboard.beginPage > 5}">
 			    	<li class="page-item">

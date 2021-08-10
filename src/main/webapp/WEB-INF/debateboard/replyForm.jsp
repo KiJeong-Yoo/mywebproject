@@ -1,25 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<script>
-function dataCheck(){
-	if(document.getElementById("title").value==""){
-		alert("제목을 입력해 주세요")
-		return;
-	}
-	if(document.getElementById("content").value==""){
-		alert("내용을 입력해 주세요")
-		return;
-	}
-	document.form.submit();
-	
-}
-</script>
-</head>
-<body>
 <div class="container">
-  <h2><button class="btn" onclick="location.href='/index'"><i class="fa fa-home"></i></button>댓글 달기</h2>
-  <form name=form action="/debateboard/reply.do" method=post>
+  <h2><button class="btn" onclick="location.href='/index'"><i class="fa fa-home"></i></button>답글 달기</h2>
+  <form name=form action="/debateboard/reply.do" method="post">
     
     <div class="form-group">
       <label for="title">제목</label>
@@ -37,7 +20,7 @@ function dataCheck(){
       </textarea>
     </div>
     
-    <button type="button" onclick=dataCheck() class="btn btn-default">댓글달기</button>
+    <button type="button" onclick="dataCheck()" class="btn btn-default">댓글달기</button>
     <button type="button" onclick="location.href='/debateboard/debatemain?requestPage=${reqeustPage}'" class="btn btn-default">취소</button>
     
     <!-- 댓글 달기 전의 정보(read.jsp)에 대해 숨겨둔 채 정보 전달 -->
@@ -51,3 +34,17 @@ function dataCheck(){
     <input type="hidden" name="writeId" value="${board.writeId}"/>
   </form>
 </div>
+<script>
+function dataCheck(){
+	if(document.getElementById("title").value==""){
+		alert("제목을 입력해 주세요")
+		return;
+	}
+	if(document.getElementById("content").value==""){
+		alert("내용을 입력해 주세요")
+		return;
+	}
+	document.form.submit();
+	
+}
+</script>

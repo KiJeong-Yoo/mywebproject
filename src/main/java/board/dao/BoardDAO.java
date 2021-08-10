@@ -19,18 +19,17 @@ public class BoardDAO implements DebateInter, FreeInter {
 	@Autowired
 	DriverManagerDataSource ds;
 	
-	public BoardDAO() {
-		
-	}
+	public BoardDAO() {}
 	
+	// 글 입력
 	public int insert(BoardVO board) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = null;
 		try {
-//			sql="insert into board values(?, board_idx_seq.nextval, ?, ?, 0, board_groupid_seq.nextval, 0, 0, 0, ?, ?, sysdate)";
+
 			sql="insert into board values(?, (select nvl(max(idx), 0) + 1 from board), ?, ?, 0, (select nvl(max(groupid), 0) + 1 from board), 0, 0, 0, ?, ?, sysdate)";
-//			sql="insert into board values(?, (select nvl(max(idx), 0) + 1 from board), ?, ?, 0, b_groupid_seq.nextval, 0, 0, 0, ?, ?, sysdate)";
+
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, board.getBoardid());
 			pstmt.setString(2, board.getTitle());
@@ -42,10 +41,9 @@ public class BoardDAO implements DebateInter, FreeInter {
 			
 			if(result > 0) {
 				System.out.println("sql 입력 성공");
-			}else {
+			} else {
 				System.out.println("sql 입력 실패");
 			}
-
 			
 		} catch(Exception e) { 
 			e.printStackTrace();
@@ -53,6 +51,7 @@ public class BoardDAO implements DebateInter, FreeInter {
 		return result;
 	}
 	
+	// 전체 게시글 리스트 출력
 	public PageBoard list(int requestPage, int boardid) {
 		
 		PageBoard pageboard = null; 
@@ -136,6 +135,7 @@ public class BoardDAO implements DebateInter, FreeInter {
 		return pageboard;
 	}
 	
+	// 메인 페이지에 뜰 게시글 5개 출력
 	public PageBoard mainpagelist(int requestPage, int boardid) {
 		
 		PageBoard pageboard = null; 
@@ -219,6 +219,7 @@ public class BoardDAO implements DebateInter, FreeInter {
 		return pageboard;
 	}
 
+	// 하나의 글 정보 가져오기
 	public BoardVO select(int idx, int boardid) {
 		BoardVO board = null;
 		String sql = "select * from board where idx=? and boardid=?";
@@ -229,6 +230,7 @@ public class BoardDAO implements DebateInter, FreeInter {
 			pstmt.setInt(1, idx);
 			pstmt.setInt(2, boardid);
 			rs = pstmt.executeQuery();
+			
 			if(rs.next()) {
 				board = new BoardVO();
 				board.setBoardid(rs.getInt("boardid"));
@@ -251,9 +253,10 @@ public class BoardDAO implements DebateInter, FreeInter {
 		return board;
 	}
 	
+	// 글 삭제하기
 	public int delete(int idx, int boardid) {
 		int result = 0;
-		commentDelete(idx);
+		commentDelete(idx); // 댓글 여부 확인
 					
 		String sql = "delete from board where idx=? and boardid=?";
 		PreparedStatement pstmt = null;
@@ -269,28 +272,27 @@ public class BoardDAO implements DebateInter, FreeInter {
 		return result;
 	}
 	
+	//댓글 삭제하기
 	private void commentDelete(int idx) {
-
-
 		String sql = "delete from comment_board where pidx=?";
 		PreparedStatement pstmt = null;
 		
-		try{
+		try {
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			pstmt.executeUpdate();
 		} catch(Exception e) { 
 			e.printStackTrace();
 
-		}
-
-		
+		}	
 	}
 
+	//글 수정하기
 	public int update(int idx, String title, String content) {
+		PreparedStatement pstmt=null;
 		int result = 0;
 		String sql = "update board set title=?,content=? where idx=?";
-		PreparedStatement pstmt=null;
+		
 		try{
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setString(1, title);
@@ -303,6 +305,7 @@ public class BoardDAO implements DebateInter, FreeInter {
 			return result;
 	}
 	
+	// 답글 입력
 	public int replyInsert(BoardVO board) {
 		// 부모글 존재 여부 확인
 		if(!parentCheck(board.getIdx())) {
@@ -311,12 +314,12 @@ public class BoardDAO implements DebateInter, FreeInter {
 		}
 		
 		// 같은 그룹 다른 댓글에 대해 depth 1 증가
-		System.out.println("replyinsert groupid : " + board.getGroupid());
 		reply_before_update(board.getGroupid(), board.getReOrder()-1);
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = null;
+		
 		try {
 			sql = "insert into board values(?, (select nvl(max(idx), 0) + 1 from board), ?, ?, 0, ?, ?, ?, 0, ?, ?, sysdate)";
 			pstmt = ds.getConnection().prepareStatement(sql);
@@ -324,18 +327,12 @@ public class BoardDAO implements DebateInter, FreeInter {
 			pstmt.setString(2, board.getTitle());
 			pstmt.setString(3, board.getContent());
 			pstmt.setInt(4, board.getGroupid());
-			System.out.println("replyinsert groupid2 : " + board.getGroupid());
 			pstmt.setInt(5, board.getDepth());
 			pstmt.setInt(6, board.getReOrder());
 			pstmt.setString(7, board.getWriteId()); //id
 			pstmt.setString(8, board.getWriteName()); //name
 			
 			result = pstmt.executeUpdate();
-			
-//			if(result > 0)
-//				System.out.println("sql 댓글 입력 성공");
-//			else
-//				System.out.println("sql 댓글 입력 실패");
 			
 		} catch(Exception e) { 
 			e.printStackTrace();
@@ -357,8 +354,7 @@ public class BoardDAO implements DebateInter, FreeInter {
 			
 			if(rs.next())
 				return true;
-			
-			
+	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -370,20 +366,24 @@ public class BoardDAO implements DebateInter, FreeInter {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = "update board set re_order=re_order+1 where groupid=? and re_order>?";
+		
 		try {
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, groupid);
 			pstmt.setInt(2, reOrder);
 			result = pstmt.executeUpdate();
+			
 			if(result < 1)
 				System.out.println("reply 업데이트 실패");
 			else
 				System.out.println("reply 전 업데이트 했음.");
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
+	//조회수 증가
 	public int readcountUpdate(int idx) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -399,6 +399,7 @@ public class BoardDAO implements DebateInter, FreeInter {
 		return result;
 	}
 
+	// 검색한 글 리스트 출력
 	public PageBoard searchlist(String field, String search, int requestPage, int boardid) {
 		PageBoard pageboard = null; 
 		
@@ -479,7 +480,4 @@ public class BoardDAO implements DebateInter, FreeInter {
 		}
 		return pageboard;
 	}
-
-	
-	
 }

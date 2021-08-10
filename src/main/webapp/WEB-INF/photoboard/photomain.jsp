@@ -23,17 +23,17 @@
 				<th>이미지</th>
 			</tr>
 			<c:forEach var="list" items="${pageboard.list}">
-			<tr>
-				<td>
-					<a href="/photoboard/view?idx=${list.idx}&requestPage=${pageboard.requestPage}">
-				${list.title}</a>
-				</td>
-				<td>
-					<a href="/photoboard/view?idx=${list.idx}&requestPage=${pageboard.requestPage}">
-					<img class="img-thumbnail"  alt="" src="${list.content}" style="width:200px;height:200px;vertical-align:middle;"></a>
-					
-				</td>
-			</tr>
+				<tr>
+					<td>
+						<a href="/photoboard/view?idx=${list.idx}&requestPage=${pageboard.requestPage}">
+					${list.title}</a>
+					</td>
+					<td>
+						<a href="/photoboard/view?idx=${list.idx}&requestPage=${pageboard.requestPage}">
+						<img class="img-thumbnail" src="${list.content}" style="width:200px;height:200px;vertical-align:middle;"></a>
+						
+					</td>
+				</tr>
 			</c:forEach>
 		</table>
 			<ul class="pagination" style="display:flex; margin-top: 20px; text-align: center; font-size: 0; justify-content: center; align-items: center;">	   
@@ -55,12 +55,11 @@
 			    	</li>
 			    </c:if>	    
 			 </ul>
-			<!-- <button class="btn btn-primary" onclick="location.href='/photoboard/write'">글쓰기</button> -->
-			<button class="btn btn-primary" onclick="check()">글쓰기</button>
-			
+			<button class="btn btn-primary" onclick="check()">글쓰기</button>			
 		</div>
 	</div>
 </section>
+
 <script>
 	let id = "<c:out value='${login}' />"
 	function check() {

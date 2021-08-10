@@ -57,75 +57,97 @@
 	</div>
     <!-- comment -->
     <c:if test="${fn:length(cboard.list) > 0 }">
-    <div class="comment_table h-100">
-	 	<table class="table">
-			<tr class="success">
-				<th>내용</th>
-				<th>작성자</th>
-				<th>작성일</th>
-			</tr>
-			<c:forEach var="clist" items="${cboard.list}" varStatus="status">
-				<tr>
+	    <div class="comment_table h-100">
+		 	<table class="table">
+				<tr class="success">
+					<th>내용</th>
+					<th>작성자</th>
+					<th>작성일</th>
+				</tr>
+				<c:forEach var="clist" items="${cboard.list}" varStatus="status">
+					<tr>
 						<c:if test="${clist.depth > 0}">
 							<td>
 								<c:forEach begin="1" end="${clist.depth}">&nbsp;&nbsp;&nbsp;</c:forEach>
 								<img style="width:42px;height:15px" src="/img/reply_icon.gif"/>
-								${clist.content}
+									${clist.content}
 							</td>
 						</c:if>
-					<c:if test="${clist.depth == 0}">	
-					<td>${clist.content}</td>
-					</c:if>
-					<td>${clist.writeid}</td>
-					<td>${clist.writedate}</td>
-				</tr>
+						<c:if test="${clist.depth == 0}">	
+							<td>${clist.content}</td>
+						</c:if>
+						<td>${clist.writeid}</td>
+						<td>${clist.writedate}</td>
+					</tr>
+					<tr>
+						<td id="${status.index}" class="comment_reply_div_${status.index}" style="display: none;">
+							<div class="form-group">
+								<form action="/comment/creply" method="post" onsubmit="return check2()">
+									<div class="col-xs-6">
+										<input class="form-control"  type="text" name="commentreply">
+									</div>
+									<div class="col-xs-2">
+										<input class="form-control"  type="submit" value="입력">
+									</div>
+									<input type="hidden" name="commentidx" value="${clist.commentidx}">
+									<input type="hidden" name="boardid" value="2">
+									<input type="hidden" name="pidx" value="${board.idx}">
+									<input type="hidden" name="groupid" value="${clist.groupid}">
+									<input type="hidden" name="depth" value="${clist.depth}">
+									<input type="hidden" name="reOrder" value="${clist.reOrder}">
+									<input type="hidden" name="writeid" value="${clist.writeid}">								
+									<input type="hidden" name="requestPage" value="${requestPage}">								
+								</form>
+							</div>
+						</td>
+						<td><a id="${status.index}" class="on">답글쓰기</a></td>
+						<td>					
+							<a class="on2"  id="re_${status.index}">댓글 수정</a>
+						</td>
+						<td id="${status.index}" class="comment_reply_div_re_${status.index}" style="display: none;">
+							<div class="form-group">
+								<form action="/comment/cupdate.do" method="post" onsubmit="return check2()">
+									<div class="col-xs-6">
+										<input class="form-control" type="text" name="commentreply">
+									</div>
+									<div class="col-xs-2">						
+										<input class="form-control" type="submit" value="입력">
+									</div>
+									<input type="hidden" name="commentidx" value="${clist.commentidx}">
+									<input type="hidden" name="boardid" value="2">
+									<input type="hidden" name="pidx" value="${board.idx}">
+									<input type="hidden" name="groupid" value="${clist.groupid}">
+									<input type="hidden" name="depth" value="${clist.depth}">
+									<input type="hidden" name="reOrder" value="${clist.reOrder}">
+									<input type="hidden" name="writeid" value="${clist.writeid}">								
+									<input type="hidden" name="requestPage" value="${requestPage}">	
+								</form>
+							</div>
+						</td>
+						<td><button class="btn btn-light"  onclick="location.href='/comment/cdelete?requestPage=${requestPage}&groupid=${clist.groupid}&pidx=${board.idx}&reorder=${clist.reOrder}&boardid=2&writeid=${clist.writeid}'">댓글 삭제</button></td>
+					</tr>
+				</c:forEach>
+				<!-- page list -->
 				<tr>
-					<td id="${status.index}" class="comment_reply_div_${status.index}" style="display: none;">
-						<div class="form-group">
-							<form action="/comment/creply" method="post" onsubmit="return check2()">
-								<div class="col-xs-6">
-									<input class="form-control"  type="text" name="commentreply">
-								</div>
-								<div class="col-xs-2">
-									<input class="form-control"  type="submit" value="입력">
-								</div>
-								<input type="hidden" name="commentidx" value="${clist.commentidx}">
-								<input type="hidden" name="boardid" value="2">
-								<input type="hidden" name="pidx" value="${board.idx}">
-								<input type="hidden" name="groupid" value="${clist.groupid}">
-								<input type="hidden" name="depth" value="${clist.depth}">
-								<input type="hidden" name="reOrder" value="${clist.reOrder}">
-								<input type="hidden" name="writeid" value="${clist.writeid}">								
-								<input type="hidden" name="requestPage" value="${requestPage}">								
-							</form>
-						</div>
+					<td colspan=4 align=center valign="center">
+						<ul class="pagination" style="display:flex; margin-top: 20px; text-align: center; font-size: 0; justify-content: center; align-items: center;">			   
+						    <c:if test="${cboard.beginPage > 5}">
+						    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${cboard.beginPage - 5}&pidx=${board.idx}&boardid=2">이전페이지</a></li>
+						    </c:if>
+						 
+						    <c:forEach var="i" begin="${cboard.beginPage}" end="${cboard.endPage}">
+						    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${i}&pidx=${board.idx}&boardid=2">${i}</a></li>
+						    </c:forEach>
+						   
+						    <c:if test="${cboard.totalPage ne cboard.endPage}">
+						    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${cboard.endPage + 1}&pidx=${board.idx}&boardid=2">다음페이지</a></li>
+						    </c:if>			    
+						</ul>
 					</td>
-					<td><a id="${status.index}" class="on">답글쓰기</a></td>
-					<td><button class="btn btn-light"  onclick="location.href='/comment/cupdate?idx=${clist.commentidx}&requestPage=${requestPage}&pidx=${board.idx}&boardid=2&writeid=${clist.writeid}'">댓글 수정</button></td>
-					<td><button class="btn btn-light"  onclick="location.href='/comment/cdelete?requestPage=${requestPage}&groupid=${clist.groupid}&pidx=${board.idx}&reorder=${clist.reOrder}&boardid=2&writeid=${clist.writeid}'">댓글 삭제</button></td>
 				</tr>
-			</c:forEach>
-			<!-- page list -->
-			<tr>
-				<td colspan=4 align=center valign="center">
-					<ul class="pagination" style="display:flex; margin-top: 20px; text-align: center; font-size: 0; justify-content: center; align-items: center;">			   
-					    <c:if test="${cboard.beginPage > 5}">
-					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${cboard.beginPage - 5}&pidx=${board.idx}&boardid=2">이전페이지</a></li>
-					    </c:if>
-					 
-					    <c:forEach var="i" begin="${cboard.beginPage}" end="${cboard.endPage}">
-					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${i}&pidx=${board.idx}&boardid=2">${i}</a></li>
-					    </c:forEach>
-					   
-					    <c:if test="${cboard.totalPage ne cboard.endPage}">
-					    	<li class="page-item"><a class="page-link" href="/comment/clist?requestPage=${cboard.endPage + 1}&pidx=${board.idx}&boardid=2">다음페이지</a></li>
-					    </c:if>			    
-					</ul>
-				</td>
-			</tr>
-			<!-- end page list -->
-		</table>
-	</div>
+				<!-- end page list -->
+			</table>
+		</div>
 	</c:if>
 </div>
 
@@ -149,6 +171,7 @@ function check2() {
 	return true;
 }
 
+// 댓글 입력 클릭 시 display 변경
 $(function() {
 	$('.on').click(function() {
 		
@@ -157,14 +180,24 @@ $(function() {
 		$('.comment_reply_div_' + id).css('display', '' );		 
 	})
 });
+
+//대댓글 입력 클릭 시 display 변경
+$(function() {
+	$('.on2').click(function() {
+		
+		let id = $(this).attr('id');
+		$('.comment_reply_div_' + id).css('display', '' );		 
+	})
+});
 </script>
-<c:if test="${id eq 'x'}">
+
+<c:if test="${id eq 'ux'}">
 	<script>
 		alert("글쓴이만 수정이 가능 합니다.");
 	</script>
 </c:if>
 
-<c:if test="${id eq 'xx'}">
+<c:if test="${id eq 'dx'}">
 	<script>
 		alert("글쓴이만 삭제가 가능 합니다.");
 	</script>

@@ -1,63 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-	<div class="container info_con">
+<div class="container info_con">
 	<section>
 		 <div id="info_con">
-            <div id="title_con">
-                <span class="span_color">회원 탈퇴</span>
-                
-            </div>
-            <div id="info_form">
-                <form action="/login/memberdelete.do" method="post" onsubmit="return check()">
-                <hr>
-                    <table id="table">
-                        <tr class="info_tr">
-                            <td class="info_td">아이디</td>
-                            <td class="info_td">
-	                            <input class="infotext" type="text" name="deleteId" id="deleteId">
-                            </td>
-                        </tr>
-                        <tr class="info_tr">
-                            <td class="info_td">이름</td>
-                            <td class="info_td"><input class="infotext"  type="text" name="deleteName" id="deleteName"></td>
-                        </tr>
-                        <tr class="info_tr">
-                            <td class="info_td">주민등록번호</td>
-                            <td class="info_td"><input class="infotext"  type="text" name="deleteSsn" id="deleteSsn"></td>
-                        </tr>
-                        <tr class="info_tr">
-                            <td class="info_td">전화번호</td>
-                            <td class="info_td"><input class="infotext"  type="text" name="deleteHp" id="deleteHp"></td>
-                        </tr>
-                        <tr class="info_tr">
-                            <td class="info_td">이메일</td>
-                            <td class="info_td"><input class="infotext"  type="email" name="deleteEmail" id="deleteEmail"></td>
-                        </tr>
-                        <tr class="info_tr">
-                            <td class="info_td">비밀번호</td>
-                            <td class="info_td"><input class="infotext"  type="password" name="deletePw" id="deletefoPw" placeholder="필수입력"></td>
-                        </tr>
-
-                        <tr class="info_tr">
-                            <td class="info_td">비밀번호 확인</td>
-                            <td class="info_td"><input class="infotext"  type="password" name="deletePw2" id="deletePw2" placeholder="필수입력"></td>
-                        </tr>              
-                        <tr class="info_tr">
-                            <td class="info_td" colspan="2">
-                                <input class="infobtn" type="submit" value="확인">
-                                <input class="infobtn"  type="button" value="취소" onclick="location.href='/index'">
-                            </td>
-                        </tr>
-                    </table>
-                    <hr>
-                </form>
-            </div>
-        </div>
+	            <div id="title_con">
+	                <span class="span_color">회원 탈퇴</span>	                
+	            </div>
+	            
+	            <div id="info_form">
+	                <form action="/login/memberdelete.do" method="post" onsubmit="return check()">
+	                <hr>
+	                    <table id="table">
+	                        <tr class="info_tr">
+	                            <td class="info_td">아이디</td>
+	                            <td class="info_td">
+		                            <input class="infotext" type="text" name="deleteId" id="deleteId">
+	                            </td>
+	                        </tr>
+	                        <tr class="info_tr">
+	                            <td class="info_td">이름</td>
+	                            <td class="info_td"><input class="infotext"  type="text" name="deleteName" id="deleteName"></td>
+	                        </tr>
+	                        <tr class="info_tr">
+	                            <td class="info_td">주민등록번호</td>
+	                            <td class="info_td"><input class="infotext"  type="text" name="deleteSsn" id="deleteSsn"></td>
+	                        </tr>
+	                        <tr class="info_tr">
+	                            <td class="info_td">전화번호</td>
+	                            <td class="info_td"><input class="infotext"  type="text" name="deleteHp" id="deleteHp"></td>
+	                        </tr>
+	                        <tr class="info_tr">
+	                            <td class="info_td">이메일</td>
+	                            <td class="info_td"><input class="infotext"  type="email" name="deleteEmail" id="deleteEmail"></td>
+	                        </tr>
+	                        <tr class="info_tr">
+	                            <td class="info_td">비밀번호</td>
+	                            <td class="info_td"><input class="infotext"  type="password" name="deletePw" id="deletefoPw" placeholder="필수입력"></td>
+	                        </tr>
+	
+	                        <tr class="info_tr">
+	                            <td class="info_td">비밀번호 확인</td>
+	                            <td class="info_td"><input class="infotext"  type="password" name="deletePw2" id="deletePw2" placeholder="필수입력"></td>
+	                        </tr>              
+	                        <tr class="info_tr">
+	                            <td class="info_td" colspan="2">
+	                                <input class="infobtn" type="submit" value="확인">
+	                                <input class="infobtn"  type="button" value="취소" onclick="location.href='/index'">
+	                            </td>
+	                        </tr>
+	                    </table>
+	                    <hr>
+	                </form>
+	            </div>
+        	</div>
         </section>
-    </div>
+</div>
 
 <script>
+
 	if(${msg} != null) {
 		alert(${msg});			
 	}

@@ -97,7 +97,7 @@ public class DebateController {
 				BoardVO board = debateService.select(Integer.parseInt(idx), boardid);
 				mv.addObject("board", board);
 				mv.addObject("requestPage", _requestPage);
-				mv.addObject("id", "not equals");
+				mv.addObject("id", "ux");
 				mv.addObject("section", "/debateboard/read.jsp");
 				mv.setViewName("/WEB-INF/index.jsp");
 			}
@@ -160,7 +160,7 @@ public class DebateController {
 				BoardVO board = debateService.select(Integer.parseInt(idx), boardid);
 				mv.addObject("board", board);
 				mv.addObject("requestPage", _requestPage);
-				mv.addObject("id", "not equals");
+				mv.addObject("id", "dx");
 	   			mv.addObject("section", "/debateboard/read.jsp");
 	   			mv.setViewName("/WEB-INF/index.jsp");
 	   			return mv;

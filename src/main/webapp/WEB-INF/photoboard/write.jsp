@@ -5,11 +5,11 @@
 	<div align="center">
 	<br>
 		<div align="center">
-		이미지 게시판
+			이미지 게시판
 		</div>
 		<form action="/photoboard/write.do" method="post" enctype="multipart/form-data" name="myForm" onsubmit="return send()">
 		<input type="hidden" name="writeId" value="${login}">
-			<table width="400" align="center">
+			<table width="400" align="center" class="table">
 				<tr>
 					<td bgcolor="#999999">제 목</td>
 					<td width="300"><input type="text" name="title"> </td>
@@ -29,38 +29,37 @@
 	</div>
 </section>
 <script>
-function isValidEmail(email) {
-    var format = /^((\w|[\-\.])+)@((\w|[\-\.])+)\.([A-Za-z]+)$/;
-    if (email.search(format) != -1)
-        return true; //올바른 포맷 형식
-    return false;
-}
- 
-String.prototype.trim = function() {
-        var TRIM_PATTERN = /(^\s*)|(\s*$)/g;
-        return this.replace(TRIM_PATTERN, "");
-}
- 
-function send() {
-    f = document.myForm;
-    
-    str = f.subject.value;
-    str = str.trim();
-    if(!str) {
-        alert("제목을 입력하세요 !!!");
-        f.subject.focus();
-        return false;
-    }
-    f.subject.value = str;
- 
-    str = f.upload.value;
-    if(!str) {
-        alert("이미지 파일을 선택 하세요 !!!");
-        f.upload.focus();
-        return false;
-    }
-    
-	return true;
-}
+	function isValidEmail(email) {
+	    var format = /^((\w|[\-\.])+)@((\w|[\-\.])+)\.([A-Za-z]+)$/;
+	    if (email.search(format) != -1)
+	        return true; //올바른 포맷 형식
+	    return false;
+	}
+	 
+	String.prototype.trim = function() {
+	        var TRIM_PATTERN = /(^\s*)|(\s*$)/g;
+	        return this.replace(TRIM_PATTERN, "");
+	}
+	 
+	function send() {
+	    f = document.myForm;
+	    
+	    str = f.subject.value;
+	    str = str.trim();
+	    if(!str) {
+	        alert("제목을 입력하세요 !!!");
+	        f.subject.focus();
+	        return false;
+	    }
+	    f.subject.value = str;
+	 
+	    str = f.upload.value;
+	    if(!str) {
+	        alert("이미지 파일을 선택 하세요 !!!");
+	        f.upload.focus();
+	        return false;
+	    }
+	    
+		return true;
+	}
 </script>
-</html>

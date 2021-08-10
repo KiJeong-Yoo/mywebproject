@@ -40,20 +40,21 @@
 	        </div>
 	   </div>
 </section>
-<script>
-var id = document.getElementById('id');
-var pw = document.getElementById('pw');
 
-function check() {
-	if(id.value == '') {
-		alert("아이디를 입력하세요");
-		return false;
-	}
+<script>
+	var id = document.getElementById('id');
+	var pw = document.getElementById('pw');
 	
-	if(pw.value == '') {
-		alert("비밀번호를 입력하세요");
-		return false;
+	function check() {
+		if(id.value == '') {
+			alert("아이디를 입력하세요");
+			return false;
+		}
+		
+		if(pw.value == '') {
+			alert("비밀번호를 입력하세요");
+			return false;
+		}
+		return true;
 	}
-	return true;
-}
 </script>

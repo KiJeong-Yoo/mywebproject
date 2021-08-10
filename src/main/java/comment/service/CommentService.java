@@ -33,4 +33,8 @@ public class CommentService {
 	public int delete(int groupid, int reorder) {
 		return comment.delete(groupid, reorder);
 	}
+
+	public int update(int idx, String commentreply) {
+		return comment.update(idx, commentreply);
+	}
 }

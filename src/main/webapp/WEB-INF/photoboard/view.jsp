@@ -6,13 +6,13 @@
 	  <tr>
 	    <td> 제목 : ${image.title } </td>
 	  </tr>
-	    <tr>
+	  <tr>
 	    <td> 작성일 : ${image.writeDay } </td>
 	  </tr>
-	    <tr>
+	  <tr>
 	    <td> 조회 수 : ${image.readcount } </td>
 	  </tr>
-	    <tr>
+	  <tr>
 	    <td> 작성자 : ${image.writeId } </td>
 	  </tr>
 	  <tr>
@@ -22,14 +22,14 @@
 	  </tr>
 	  
 	  <tfoot>
-	  	<tr>
-	  		<td>
-	  			<a href="/photoboard/update?idx=${image.idx}&title=${image.title}">수정</a>
-	  		</td>
-	  		<td>
-	  			<a href="/photoboard/delete?idx=${image.idx}&requestPage=1">삭제</a>
-	  		</td>
-	  	</tr>
+		  	<tr>
+		  		<td>
+		  			<a href="/photoboard/update?idx=${image.idx}&title=${image.title}">수정</a>
+		  		</td>
+		  		<td>
+		  			<a href="/photoboard/delete?idx=${image.idx}&requestPage=1">삭제</a>
+		  		</td>
+		  	</tr>
 	  </tfoot>
 	</table>
 </div>

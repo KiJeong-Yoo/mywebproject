@@ -113,7 +113,7 @@ public class FreeController {
 				BoardVO board = freeService.select(Integer.parseInt(idx), boardid);
 				mv.addObject("board", board);
 				mv.addObject("requestPage", _requestPage);
-				mv.addObject("id", "x");
+				mv.addObject("id", "ux");
 				mv.addObject("section", "/freeboard/read.jsp");
 				mv.setViewName("/WEB-INF/index.jsp");
 			}
@@ -175,7 +175,7 @@ public class FreeController {
 				BoardVO board = freeService.select(Integer.parseInt(idx), boardid);
 				mv.addObject("board", board);
 				mv.addObject("requestPage", _requestPage);
-//				mv.addObject("id", "xx");
+				mv.addObject("id", "dx");
 	   			mv.addObject("section", "/freeboard/read.jsp");
 	   			mv.setViewName("/WEB-INF/index.jsp");
 	   			return mv;

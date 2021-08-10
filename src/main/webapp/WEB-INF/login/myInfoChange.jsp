@@ -5,12 +5,13 @@ session.getAttribute("login");
 session.getAttribute("loginvo");
 %>
 <section>
-<div id="info_container">
+	<div id="info_container">
         <div id="info_con">
             <div id="title_con">
                 <span class="span_color">수정할 개인정보를 입력해주세요</span>
                 <p><a href="/login/memberdelete">회원 탈퇴</a>
             </div>
+            
             <div id="info_form">
                 <form action="/login/info.do" method="post" onsubmit="return check()">
                     <table id="info_tbl">
@@ -58,6 +59,7 @@ session.getAttribute("loginvo");
         </div>
     </div>
 </section>
+
 <script>
 	var pw = document.getElementById('infoPw');
     var pw2 = document.getElementById('infoPw2');

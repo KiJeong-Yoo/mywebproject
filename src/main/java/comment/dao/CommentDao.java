@@ -292,4 +292,5 @@ public class CommentDao implements CommentInter {
 		return result;
 	}
 
+
 }

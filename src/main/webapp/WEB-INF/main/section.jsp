@@ -2,183 +2,183 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section>
-<div class="container-md">
-	<div id="slide_con">
-		    <div class="slidebox">
-        <input type="radio" name="slide" id="slide01" checked>
-        <input type="radio" name="slide" id="slide02">
-        <input type="radio" name="slide" id="slide03">
-        <input type="radio" name="slide" id="slide04">
-        <ul class="slidelist">
-            <li class="slideitem">
-                <div>
-                    <label for="slide04" class="left"></label>
-                    <label for="slide02" class="right"></label>
-                    <a><img src="/img/fff.jpg"></a>
-                </div>
-            </li>
-            <li class="slideitem">
-                <div>
-                    <label for="slide01" class="left"></label>
-                    <label for="slide03" class="right"></label>
-                    <a><img src="/img/asdascxz.jpg"></a>
-                </div>
-            </li>
-            <li class="slideitem">
-                <div>
-                    <label for="slide02" class="left"></label>
-                    <label for="slide04" class="right"></label>
-                    <a><img src="/img/12312.jpg"></a>
-                </div>
-            </li>
-            <li class="slideitem">
-                <div>
-                    <label for="slide03" class="left"></label>
-                    <label for="slide01" class="right"></label>
-                    <a><img src="/img/qweasd.jpg"></a>
-                </div>
-            </li>
-        </ul>
-    </div>
-	</div>
+	<div class="container-md">
+		<div id="slide_con">
+			    <div class="slidebox">
+	        <input type="radio" name="slide" id="slide01" checked>
+	        <input type="radio" name="slide" id="slide02">
+	        <input type="radio" name="slide" id="slide03">
+	        <input type="radio" name="slide" id="slide04">
+	        <ul class="slidelist">
+	            <li class="slideitem">
+	                <div>
+	                    <label for="slide04" class="left"></label>
+	                    <label for="slide02" class="right"></label>
+	                    <a><img src="/img/fff.jpg"></a>
+	                </div>
+	            </li>
+	            <li class="slideitem">
+	                <div>
+	                    <label for="slide01" class="left"></label>
+	                    <label for="slide03" class="right"></label>
+	                    <a><img src="/img/asdascxz.jpg"></a>
+	                </div>
+	            </li>
+	            <li class="slideitem">
+	                <div>
+	                    <label for="slide02" class="left"></label>
+	                    <label for="slide04" class="right"></label>
+	                    <a><img src="/img/12312.jpg"></a>
+	                </div>
+	            </li>
+	            <li class="slideitem">
+	                <div>
+	                    <label for="slide03" class="left"></label>
+	                    <label for="slide01" class="right"></label>
+	                    <a><img src="/img/qweasd.jpg"></a>
+	                </div>
+	            </li>
+	        </ul>
+	    </div>
+		</div>
+		
+		<div class="weather-wrapper">
+	            <div class="seoul weather-card">
+	                <div class="City weathercity seoul">서울</div>
+	                <span class="CurrIcon weathericon seoul"></span>
+	                <span class="CurrTemp weathertemp seoul"></span>
+	            </div>
+	            
+	            <div class="incheon weather-card">
+	                <div class="City2 weathercity incheon">인천</div>
+	                <span class="CurrIcon2 weathericon incheon"></span>
+	                <span class="CurrTemp2 weathertemp incheon"></span>
+	            </div> 
+	             
+	            <div class="uijeongbu weather-card">
+	                <div class="City6 weathercity Uijeongbu-si">의정부</div>
+	                <span class="CurrIcon6 weathericon Uijeongbu-si"></span>
+	                <span class="CurrTemp6 weathertemp Uijeongbu-si"></span>
+	            </div>
+	            
+	            <div class="guri weather-card">
+	                <div class="City21 weathercity guri">구리</div>
+	                <span class="CurrIcon21 weathericon guri"></span>
+	                <span class="CurrTemp21 weathertemp guri"></span>
+	            </div>
+	            
+	            <div class="paju weather-card">
+	                <div class="City19 weathercity paju">파주</div>
+	                <span class="CurrIcon19 weathericon paju"></span>
+	                <span class="CurrTemp19 weathertemp paju"></span>
+	            </div>
+	            
+	            <div class="suwon weather-card">
+	                <div class="City16 weathercity suwon">수원</div>
+	                <span class="CurrIcon16 weathericon suwon"></span>
+	                <span class="CurrTemp16 weathertemp suwon"></span>
+	            </div>
+	            
+	            <div class="yongin weather-card">
+	                <div class="City20 weathercity yongin">용인</div>
+	                <span class="CurrIcon20 weathericon yongin"></span>
+	                <span class="CurrTemp20 weathertemp yongin"></span>
+	            </div>
+	            
+	            <div class="chuncheon weather-card">
+	                <div class="City14 weathercity Chuncheon">춘천</div>
+	                <span class="CurrIcon14 weathericon Chuncheon"></span>
+	                <span class="CurrTemp14 weathertemp Chuncheon"></span>
+	            </div>
+	            
+	            <div class="sokcho weather-card">
+	                <div class="City13 weathercity Sokcho">속초</div>
+	                <span class="CurrIcon13 weathericon Sokcho"></span>
+	                <span class="CurrTemp13 weathertemp Sokcho"></span>
+	            </div>
+	            
+	            <div class="gangneung weather-card">
+	                <div class="City15 weathercity Gangneung">강릉</div>
+	                <span class="CurrIcon15 weathericon Gangneung"></span>
+	                <span class="CurrTemp15 weathertemp Gangneung"></span>
+	            </div>   
+	            
+	            <div class="cheongju weather-card">
+	                <div class="City11 weathercity Cheongju-si">청주</div>
+	                <span class="CurrIcon11 weathericon Cheongju-si"></span>
+	                <span class="CurrTemp11 weathertemp Cheongju-si"></span>
+				</div>
+				
+	            <div class="cheonan weather-card">
+	                <div class="City12 weathercity Cheonan">천안</div>
+	                <span class="CurrIcon12 weathericon Cheonan"></span>
+	                <span class="CurrTemp12 weathertemp  Cheonan"></span>
+	            </div>
 	
-	<div class="weather-wrapper">
-            <div class="seoul weather-card">
-                <div class="City weathercity seoul">서울</div>
-                <span class="CurrIcon weathericon seoul"></span>
-                <span class="CurrTemp weathertemp seoul"></span>
-            </div>
-            
-            <div class="incheon weather-card">
-                <div class="City2 weathercity incheon">인천</div>
-                <span class="CurrIcon2 weathericon incheon"></span>
-                <span class="CurrTemp2 weathertemp incheon"></span>
-            </div> 
-             
-            <div class="uijeongbu weather-card">
-                <div class="City6 weathercity Uijeongbu-si">의정부</div>
-                <span class="CurrIcon6 weathericon Uijeongbu-si"></span>
-                <span class="CurrTemp6 weathertemp Uijeongbu-si"></span>
-            </div>
-            
-            <div class="guri weather-card">
-                <div class="City21 weathercity guri">구리</div>
-                <span class="CurrIcon21 weathericon guri"></span>
-                <span class="CurrTemp21 weathertemp guri"></span>
-            </div>
-            
-            <div class="paju weather-card">
-                <div class="City19 weathercity paju">파주</div>
-                <span class="CurrIcon19 weathericon paju"></span>
-                <span class="CurrTemp19 weathertemp paju"></span>
-            </div>
-            
-            <div class="suwon weather-card">
-                <div class="City16 weathercity suwon">수원</div>
-                <span class="CurrIcon16 weathericon suwon"></span>
-                <span class="CurrTemp16 weathertemp suwon"></span>
-            </div>
-            
-            <div class="yongin weather-card">
-                <div class="City20 weathercity yongin">용인</div>
-                <span class="CurrIcon20 weathericon yongin"></span>
-                <span class="CurrTemp20 weathertemp yongin"></span>
-            </div>
-            
-            <div class="chuncheon weather-card">
-                <div class="City14 weathercity Chuncheon">춘천</div>
-                <span class="CurrIcon14 weathericon Chuncheon"></span>
-                <span class="CurrTemp14 weathertemp Chuncheon"></span>
-            </div>
-            
-            <div class="sokcho weather-card">
-                <div class="City13 weathercity Sokcho">속초</div>
-                <span class="CurrIcon13 weathericon Sokcho"></span>
-                <span class="CurrTemp13 weathertemp Sokcho"></span>
-            </div>
-            
-            <div class="gangneung weather-card">
-                <div class="City15 weathercity Gangneung">강릉</div>
-                <span class="CurrIcon15 weathericon Gangneung"></span>
-                <span class="CurrTemp15 weathertemp Gangneung"></span>
-            </div>   
-            
-            <div class="cheongju weather-card">
-                <div class="City11 weathercity Cheongju-si">청주</div>
-                <span class="CurrIcon11 weathericon Cheongju-si"></span>
-                <span class="CurrTemp11 weathertemp Cheongju-si"></span>
-			</div>
-			
-            <div class="cheonan weather-card">
-                <div class="City12 weathercity Cheonan">천안</div>
-                <span class="CurrIcon12 weathericon Cheonan"></span>
-                <span class="CurrTemp12 weathertemp  Cheonan"></span>
-            </div>
-
-            
-            <div class="daejeon weather-card">
-                <div class="City5 weathercity daejeon">대전</div>
-                <span class="CurrIcon5 weathericon daejeon"></span>
-                <span class="CurrTemp5 weathertemp daejeon"></span>
-            </div>
-
-            <div class="daegu weather-card">
-                <div class="City7 weathercity daegu">대구</div>
-                <span class="CurrIcon7 weathericon daegu"></span>
-                <span class="CurrTemp7 weathertemp daegu"></span>
-            </div>
-
-            <div class="ulsan weather-card">
-                <div class="City8 weathercity Ulsan">울산</div>
-                <span class="CurrIcon8 weathericon Ulsan"></span>
-                <span class="CurrTemp8 weathertemp Ulsan"></span>
-            </div>
-            
-            <div class="ulsan weather-card">
-                <div class="City8 weathercity Ulsan">울산</div>
-                <span class="CurrIcon8 weathericon Ulsan"></span>
-                <span class="CurrTemp8 weathertemp Ulsan"></span>
-            </div>
-
-
-            <div class="pohang weather-card">
-                <div class="City17 weathercity pohang">포항</div>
-                <span class="CurrIcon17 weathericon pohang"></span>
-                <span class="CurrTemp17 weathertemp pohang"></span>
-            </div>  
-            
-            <div class="jeonju weather-card">
-                <div class="City18 weathercity jeonju">전주</div>
-                <span class="CurrIcon18 weathericon jeonju"></span>
-                <span class="CurrTemp18 weathertemp jeonju"></span>
-            </div>
-            
-            <div class="gwangju weather-card">
-                <div class="City9 weathercity Gwangju">광주</div>
-                <span class="CurrIcon9 weathericon Gwangju"></span>
-                <span class="CurrTemp9 weathertemp Gwangju"></span>
-            </div>
-            
-            <div class="mokpo weather-card">
-                <div class="City10 weathercity Mokpo">목포</div>
-                <span class="CurrIcon10 weathericon Mokpo"></span>
-                <span class="CurrTemp10 weathertemp Mokpo"></span>
-            </div>
-
-            <div class="jeju weather-card">
-                <div class="City3 weathercity jeju">제주</div>
-                <span class="CurrIcon3 weathericon jeju"></span>
-                <span class="CurrTemp3 weathertemp jeju"></span>
-            </div>
-    </div>
-    
-    <!-- 게시판 -->
-   <div id="board_con">
-		<jsp:include page="/WEB-INF/debateboard/sec_debate.jsp" />
-    </div>
-    <div>
-    	<jsp:include page="/WEB-INF/news/mainrandom.jsp" />
-    </div>
+	            
+	            <div class="daejeon weather-card">
+	                <div class="City5 weathercity daejeon">대전</div>
+	                <span class="CurrIcon5 weathericon daejeon"></span>
+	                <span class="CurrTemp5 weathertemp daejeon"></span>
+	            </div>
+	
+	            <div class="daegu weather-card">
+	                <div class="City7 weathercity daegu">대구</div>
+	                <span class="CurrIcon7 weathericon daegu"></span>
+	                <span class="CurrTemp7 weathertemp daegu"></span>
+	            </div>
+	
+	            <div class="ulsan weather-card">
+	                <div class="City8 weathercity Ulsan">울산</div>
+	                <span class="CurrIcon8 weathericon Ulsan"></span>
+	                <span class="CurrTemp8 weathertemp Ulsan"></span>
+	            </div>
+	            
+	            <div class="ulsan weather-card">
+	                <div class="City8 weathercity Ulsan">울산</div>
+	                <span class="CurrIcon8 weathericon Ulsan"></span>
+	                <span class="CurrTemp8 weathertemp Ulsan"></span>
+	            </div>
+	
+	
+	            <div class="pohang weather-card">
+	                <div class="City17 weathercity pohang">포항</div>
+	                <span class="CurrIcon17 weathericon pohang"></span>
+	                <span class="CurrTemp17 weathertemp pohang"></span>
+	            </div>  
+	            
+	            <div class="jeonju weather-card">
+	                <div class="City18 weathercity jeonju">전주</div>
+	                <span class="CurrIcon18 weathericon jeonju"></span>
+	                <span class="CurrTemp18 weathertemp jeonju"></span>
+	            </div>
+	            
+	            <div class="gwangju weather-card">
+	                <div class="City9 weathercity Gwangju">광주</div>
+	                <span class="CurrIcon9 weathericon Gwangju"></span>
+	                <span class="CurrTemp9 weathertemp Gwangju"></span>
+	            </div>
+	            
+	            <div class="mokpo weather-card">
+	                <div class="City10 weathercity Mokpo">목포</div>
+	                <span class="CurrIcon10 weathericon Mokpo"></span>
+	                <span class="CurrTemp10 weathertemp Mokpo"></span>
+	            </div>
+	
+	            <div class="jeju weather-card">
+	                <div class="City3 weathercity jeju">제주</div>
+	                <span class="CurrIcon3 weathericon jeju"></span>
+	                <span class="CurrTemp3 weathertemp jeju"></span>
+	            </div>
+	    </div>
+	    
+	    <!-- 게시판 -->
+	   <div id="board_con">
+			<jsp:include page="/WEB-INF/debateboard/sec_debate.jsp" />
+	    </div>
+	    <div>
+	    	<jsp:include page="/WEB-INF/news/mainrandom.jsp" />
+	    </div>
     </div>        
 </section>
 <script>

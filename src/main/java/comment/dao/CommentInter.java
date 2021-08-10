@@ -17,4 +17,6 @@ public interface CommentInter {
 
 	int delete(int groupid, int reorder);
 
+	int update(int idx, String commentreply);
+
 }

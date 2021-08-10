@@ -1,13 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<title>JSP Poll</title>
-</head>
-<body>
-<div align="center">
+<section>
+	<div align="center" class="container">
 		<br />
 		<h2>VOTE PROGRAM</h2>
 		<!--  <hr width="600" />-->
@@ -16,12 +11,11 @@
 		<span style="color: #99004C;">"항목"</span> <br/>
 		그리고 "시간"을 선택해주세요</h3>
 		<hr width="600" />
-	<form name="frm" method="get" action="/vote/pollInsertProc">
+	<form name="frm" method="post" action="/vote/pollInsertProc">
 		<!-- 투표처리기능 pollInsertProc.jsp-->
-			<table border="1" width="500" hight="400" id="table">
+			<table border="1" width="500" hight="400" class="table">
 				<tr>
-					<td style= "background-color:#005766; color: #FFFFFF; 
-					font-size:18; text-align: center;"><b>질문</b></td>
+					<td style= "background-color:#005766; color: #FFFFFF; font-size:18; text-align: center;"><b>질문</b></td>
 					<td colspan="2"><input name="question" size="54"></td>
 				</tr>
 				<tr>
@@ -62,8 +56,7 @@
 					</td>
 				</tr>				
 				<tr>
-					<td style= "background-color: #99004C; color: #FFFFFF;
-					font-size:18; text-align: center; "rowspan="30" >
+					<td style= "background-color: #99004C; color: #FFFFFF; font-size:18; text-align: center; "rowspan="30" >
 					<b>항목</b></td>
 				</tr>
 			</table>
@@ -80,7 +73,8 @@
 			<input type="hidden" name="edate">
 		</form>
 	</div>
-</body>
+</section>
+
 <script>
 	function send() {
 		f = document.frm;

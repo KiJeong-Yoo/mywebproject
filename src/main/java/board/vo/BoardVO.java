@@ -3,22 +3,30 @@ package board.vo;
 import java.util.Date;
 
 public class BoardVO {
-	int boardid;
-	int idx;
-	String title;
-	String content;
-	int readcount;
-	int groupid;
-	int depth;
-	int reOrder;
-	int isdel;
-	String writeId;
-	String writeName;
-	Date writeDay;
+	int boardid; // 게시판 구분 번호
+	int idx; // 게시글 번호
+	String title; // 게시글 제목
+	String content; // 게시글 내용
+	int readcount; // 게시글 조회수
+	int groupid; // 게시글과 답글을 묶어줄 번호
+	int depth; // 댓글 순서
+	int reOrder; // 댓글 갯수
+	int isdel; // 삭제 여부
+	String writeId; // 작성자 아이디
+	String writeName; // 작성자 닉네임
+	Date writeDay; // 작성일
 	
 	public BoardVO() {}
 
 	public BoardVO(String title, String content, String writeId, String writeName) {
+		this.title = title;
+		this.content = content;
+		this.writeId = writeId;
+		this.writeName = writeName;
+	}
+	
+	public BoardVO(int boardid, String title, String content, String writeId, String writeName) {
+		this.boardid = boardid;
 		this.title = title;
 		this.content = content;
 		this.writeId = writeId;
@@ -40,15 +48,6 @@ public class BoardVO {
 		this.writeName = writeName;
 		this.writeDay = writeDay;
 	}
-
-	public BoardVO(int boardid, String title, String content, String writeId, String writeName) {
-		this.boardid = boardid;
-		this.title = title;
-		this.content = content;
-		this.writeId = writeId;
-		this.writeName = writeName;
-	}
-
 
 	public int getBoardid() {
 		return boardid;
@@ -152,7 +151,5 @@ public class BoardVO {
 				+ ", readcount=" + readcount + ", groupid=" + groupid + ", depth=" + depth + ", reOrder=" + reOrder
 				+ ", isdel=" + isdel + ", writeId=" + writeId + ", writeName=" + writeName + ", writeDay=" + writeDay
 				+ "]";
-	}
-
-	
+	}	
 }

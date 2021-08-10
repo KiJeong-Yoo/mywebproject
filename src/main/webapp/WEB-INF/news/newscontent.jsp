@@ -13,10 +13,12 @@
 					<span class="news_content">${news.content}</span>
 				</div>
 			</div>
+			
 			<div id="news_topcount" style="margin-top: 50px;">
 				<div id="topcount_head">
 					<h3>조회수 탑 10 뉴스</h3>	
 				</div>
+				
 				<div class="news_ul">
 					<ul class="topcount_ul" style="padding: 60px 10px; list-style: none;">
 						<c:forEach items="${topnews}" var="topnews">

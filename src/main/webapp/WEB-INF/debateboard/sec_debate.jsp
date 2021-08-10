@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- 메인 화면에 보여줄 게시판 미리보기 부분 -->
 <section>
 	<div class="container" style="display: flex; justify-content: space-between; margin-top: 50px; padding: 0 10px; height: 350px;">
 		<div class="sec_debate_con" style="margin-left: 100px;">

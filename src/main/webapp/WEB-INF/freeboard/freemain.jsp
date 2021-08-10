@@ -49,6 +49,7 @@
 					</tr>
 				</c:forEach>
 			</table>
+			
 			<ul class="pagination" style="display:flex; margin-top: 20px; text-align: center; font-size: 0; justify-content: center; align-items: center;">			   
 				<c:if test="${pageboard.beginPage > 5}">
 					  <li class="page-item"><a class="page-link" href="/freeboard/list?requestPage=${pageboard.beginPage - 5}">이전페이지</a></li>
@@ -61,8 +62,8 @@
 				<c:if test="${pageboard.totalPage ne pageboard.endPage}">
 					 <li class="page-item"><a class="page-link" href="/freeboard/list?requestPage=${pageboard.endPage + 1}">다음페이지</a></li>
 				</c:if>			    
-				</ul>
-				<button class="btn btn-primary" onclick="location.href='/freeboard/insert'">글쓰기</button>
+			</ul>
+			<button class="btn btn-primary" onclick="location.href='/freeboard/insert'">글쓰기</button>
 		</div>
 	</div>
 </section>
