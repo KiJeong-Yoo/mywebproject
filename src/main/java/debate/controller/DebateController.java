@@ -28,15 +28,13 @@ public class DebateController {
 	
 	int boardid = 1;
 	int request_Page = 1;
-	String _requestPage = "";
 	
 	@RequestMapping("debatemain")
 	public ModelAndView main(String requestPage) {
 		ModelAndView mv = new ModelAndView();
-		_requestPage = requestPage;
 		
-		if(_requestPage != null && !_requestPage.equals(""))
-			request_Page = Integer.parseInt(_requestPage);
+		if(requestPage != null && !requestPage.equals(""))
+			request_Page = Integer.parseInt(requestPage);
 		
 		
 		PageBoard pageboard = debateService.list(request_Page, boardid);
@@ -85,18 +83,17 @@ public class DebateController {
 			return mv;
 		} else {
 			if(session.getAttribute("login").equals(writeid)) {
-				_requestPage = requestPage;
 				
 				BoardVO board = debateService.select(Integer.parseInt(idx), boardid);
 				mv.addObject("board", board);
-				mv.addObject("requestPage", _requestPage);
+				mv.addObject("requestPage", requestPage);
 				mv.addObject("section", "/debateboard/update.jsp");
 				mv.setViewName("/WEB-INF/index.jsp");
 				
 			} else {
 				BoardVO board = debateService.select(Integer.parseInt(idx), boardid);
 				mv.addObject("board", board);
-				mv.addObject("requestPage", _requestPage);
+				mv.addObject("requestPage", requestPage);
 				mv.addObject("id", "ux");
 				mv.addObject("section", "/debateboard/read.jsp");
 				mv.setViewName("/WEB-INF/index.jsp");
@@ -112,10 +109,9 @@ public class DebateController {
 		int uresult = debateService.update(Integer.parseInt(idx), title, content);
 		if(uresult == 1) {
 			request_Page = 1;
-			_requestPage = requestPage;
 				
-   			if(_requestPage != null && !_requestPage.equals(""))
-   				request_Page = Integer.parseInt(_requestPage);
+   			if(requestPage != null && !requestPage.equals(""))
+   				request_Page = Integer.parseInt(requestPage);
    			
    			PageBoard pageboard = debateService.list(request_Page, boardid);
    			mv.addObject("pageboard", pageboard);
@@ -130,7 +126,6 @@ public class DebateController {
 	public ModelAndView delete(HttpServletRequest req, String idx, String requestPage, String writeid) {
 		HttpSession session = req.getSession();
 		ModelAndView mv = new ModelAndView();
-		System.out.println("session : " + session.getAttribute("login"));
 
 		if(session.getAttribute("login") == null) {
 			mv.addObject("section","/login/loginMain.jsp");
@@ -143,10 +138,9 @@ public class DebateController {
 				
 				if(dresult == 1) {
 					request_Page = 1;
-					_requestPage = requestPage;
 					
-					if(_requestPage != null && !_requestPage.equals(""))
-						request_Page = Integer.parseInt(_requestPage);
+					if(requestPage != null && !requestPage.equals(""))
+						request_Page = Integer.parseInt(requestPage);
 					
 					PageBoard pageboard = debateService.list(request_Page, boardid);
 					mv.addObject("pageboard", pageboard);
@@ -156,10 +150,9 @@ public class DebateController {
 		   			return mv;
 				}
 			} else {
-				_requestPage = requestPage;
 				BoardVO board = debateService.select(Integer.parseInt(idx), boardid);
 				mv.addObject("board", board);
-				mv.addObject("requestPage", _requestPage);
+				mv.addObject("requestPage", requestPage);
 				mv.addObject("id", "dx");
 	   			mv.addObject("section", "/debateboard/read.jsp");
 	   			mv.setViewName("/WEB-INF/index.jsp");
@@ -214,10 +207,9 @@ public class DebateController {
    		if(debateService.replyInsert(board) == 1) {
    			System.out.println("댓글 성공");
    			request_Page = 1;
-			_requestPage = requestPage;
-				
-   			if(_requestPage != null && !_requestPage.equals(""))
-   				request_Page = Integer.parseInt(_requestPage);
+
+   			if(requestPage != null && !requestPage.equals(""))
+   				request_Page = Integer.parseInt(requestPage);
    			
    			PageBoard pageboard = debateService.list(request_Page, boardid);
    			mv.addObject("pageboard", pageboard);
@@ -233,10 +225,9 @@ public class DebateController {
 		ModelAndView mv = new ModelAndView();
 		
 		request_Page = 1;
-		_requestPage = requestPage;
-		
-		if(_requestPage != null && !_requestPage.equals(""))
-				request_Page = Integer.parseInt(_requestPage);
+
+		if(requestPage != null && !requestPage.equals(""))
+				request_Page = Integer.parseInt(requestPage);
 		
 		PageBoard pageboard = debateService.searchlist(field, search, request_Page, Integer.parseInt(boardid));
 		mv.addObject("pageboard", pageboard);

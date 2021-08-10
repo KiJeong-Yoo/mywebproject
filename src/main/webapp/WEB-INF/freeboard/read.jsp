@@ -42,6 +42,8 @@
 		<button class="btn btn-light" onclick="location.href='/freeboard/update?idx=${board.idx}&requestPage=${requestPage}&writeid=${board.writeName}'">글 수정</button>
 		<button class="btn btn-light" onclick="location.href='/freeboard/delete?idx=${board.idx}&requestPage=${requestPage}&writeid=${board.writeName}'">글 삭제</button>
     </div>
+    
+    <!-- 댓글 -->
     <div class="form-group form-btn-group" style="float: left; margin: 15px; display:flex;">
  		<form action="/comment/freecomment" method="post" onsubmit="return check()">
  			<div class="col-xs-6">

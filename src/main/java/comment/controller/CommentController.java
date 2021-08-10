@@ -43,7 +43,7 @@ public class CommentController {
 			mv.setViewName("/WEB-INF/index.jsp");
 			return mv;
 		}
-		
+
 		CommentVo comment = new CommentVo(c_content, Integer.parseInt(pidx), cwriteid);
 		
 		int cresult = commentService.insert(comment);
@@ -51,7 +51,7 @@ public class CommentController {
 		board = freeService.select(Integer.parseInt(pidx), 2);		
 				
 		if(cresult == 1) {
-			CPageBoard cpb = commentService.list(Integer.parseInt(crequestPage), Integer.parseInt(pidx));
+			CPageBoard cpb = commentService.list(1, Integer.parseInt(pidx));
 			mv.addObject("board", board);
 			mv.addObject("cboard", cpb);
 			mv.addObject("requestPage", Integer.parseInt(crequestPage));
@@ -86,7 +86,7 @@ public class CommentController {
 		board = debateService.select(Integer.parseInt(pidx), 1);		
 				
 		if(cresult == 1) {
-			CPageBoard cpb = commentService.list(Integer.parseInt(crequestPage), Integer.parseInt(pidx));
+			CPageBoard cpb = commentService.list(1, Integer.parseInt(pidx));
 			mv.addObject("board", board);
 			mv.addObject("cboard", cpb);
 			mv.addObject("requestPage", Integer.parseInt(crequestPage));
@@ -140,18 +140,16 @@ public class CommentController {
 		}
 				
 		CommentVo comment = new CommentVo(Integer.parseInt(commentidx), Integer.parseInt(pidx), commentreply, Integer.parseInt(groupid), (Integer.parseInt(depth) + 1), (Integer.parseInt(reOrder) + 1), writeid);
-		request_Page = Integer.parseInt(requestPage);
-		int boardnumber = Integer.parseInt(boardid);
 		
+		int boardnumber = Integer.parseInt(boardid);
 		
 		int rresult = commentService.replyInsert(comment);
 
 		if(rresult == 1) {
    			request_Page = 1;
-			_requestPage = requestPage;
 				
-   			if(_requestPage != null && !_requestPage.equals(""))
-   				request_Page = Integer.parseInt(_requestPage);
+   			if(requestPage != null && !requestPage.equals(""))
+   				request_Page = Integer.parseInt(requestPage);
    			
    			if(boardnumber == 1) {
    				board = debateService.select(Integer.parseInt(pidx), boardnumber);
