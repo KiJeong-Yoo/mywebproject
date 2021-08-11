@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import board.vo.BoardVO;
-import board.vo.PageBoard;
 import comment.service.CommentService;
 import comment.vo.CPageBoard;
 import comment.vo.CommentVo;
 import debate.service.DebateService;
 import free.service.FreeService;
 
+//댓글 관련
 @Controller
 @RequestMapping("/comment")
 public class CommentController {
@@ -27,8 +27,7 @@ public class CommentController {
 	@Autowired
 	DebateService debateService; // 토론 게시판
 	
-	int request_Page = 1;
-	String _requestPage = "";	
+	int request_Page = 1;	
 	
 	// 자유게시판 댓글 입력
 	@RequestMapping("/freecomment")
@@ -96,35 +95,6 @@ public class CommentController {
 		return mv;
 	}
 	
-	//댓글 출력
-	@RequestMapping("/clist")
-	public ModelAndView list(String requestPage, String pidx, String boardid) {
-		ModelAndView mv = new ModelAndView();
-		BoardVO board = null;
-		
-		int request_Page = 1;
-		int boardnumber = Integer.parseInt(boardid);
-		
-		if(requestPage != null && !requestPage.equals("")) 
-			request_Page = Integer.parseInt(requestPage);
-		
-		CPageBoard pageboard = commentService.list(request_Page, Integer.parseInt(pidx));
-		
-		if(boardnumber == 1) {
-			board = debateService.select(Integer.parseInt(pidx), boardnumber);
-			mv.addObject("section", "/debateboard/read.jsp");
-		} else {
-			board = freeService.select(Integer.parseInt(pidx), boardnumber);  
-			mv.addObject("section", "/freeboard/read.jsp");
-		}
-		
-		mv.addObject("board", board);
-		mv.addObject("cboard", pageboard);
-		mv.addObject("requestPage", request_Page);
-		mv.setViewName("/WEB-INF/index.jsp");
-		return mv;
-	}
-	
 	//댓글에 댓글
 	@RequestMapping("/creply")
 	public ModelAndView creply(HttpServletRequest req,String requestPage, String commentreply, String commentidx, String pidx, String groupid, String depth, String reOrder, String writeid, String boardid) {
@@ -146,10 +116,6 @@ public class CommentController {
 		int rresult = commentService.replyInsert(comment);
 
 		if(rresult == 1) {
-   			request_Page = 1;
-				
-   			if(requestPage != null && !requestPage.equals(""))
-   				request_Page = Integer.parseInt(requestPage);
    			
    			if(boardnumber == 1) {
    				board = debateService.select(Integer.parseInt(pidx), boardnumber);
@@ -159,17 +125,18 @@ public class CommentController {
    				mv.addObject("section", "/freeboard/read.jsp");
    			}
    			
-   			CPageBoard cpb = commentService.list(request_Page, Integer.parseInt(pidx));
-   			
+   			CPageBoard cpb = commentService.list(1, Integer.parseInt(pidx));
+
    			mv.addObject("board", board);
    			mv.addObject("cboard", cpb);
-   			mv.addObject("requestPage", request_Page);		
+   			mv.addObject("requestPage", 1);		
 			mv.setViewName("/WEB-INF/index.jsp");
 			
 		} 
 		return mv;
 	}
 	
+	// 댓글 삭제
 	@RequestMapping("/cdelete")
 	public ModelAndView delete(HttpServletRequest req, String requestPage, String writeid, String groupid, String pidx, String reorder, String boardid) {
 		ModelAndView mv = new ModelAndView();
@@ -227,7 +194,7 @@ public class CommentController {
 	}
 	
 	@RequestMapping("/cupdate.do")
-	public ModelAndView update(HttpServletRequest req, String requestPage, String groupid, String pidx, String reorder, String boardid, String writeid, String commentidx, String commentreply) {
+	public ModelAndView update(HttpServletRequest req, String requestPage, String groupid, String pidx, String reorder, String boardid, String writeid, String commentidx, String commentreply1) {
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = req.getSession();
 		
@@ -244,7 +211,7 @@ public class CommentController {
 			
 			if(session.getAttribute("login").equals(writeid)) {
 				
-				int result = commentService.update(Integer.parseInt(commentidx), commentreply);
+				int result = commentService.update(Integer.parseInt(commentidx), commentreply1);
 				
 				if(result == 1)
 					System.out.println("update success");
@@ -285,4 +252,34 @@ public class CommentController {
 			
 		return mv;
 	}
+	
+	//댓글 출력
+	@RequestMapping("/clist")
+	public ModelAndView list(String requestPage, String pidx, String boardid) {
+	     ModelAndView mv = new ModelAndView();
+	     BoardVO board = null;
+	     
+	     int request_Page = 1;
+	     int boardnumber = Integer.parseInt(boardid);
+	     
+	     // 요청 페이지 확인, 없을 경우 1 페이지로
+	     if(requestPage != null && !requestPage.equals("")) 
+	        request_Page = Integer.parseInt(requestPage);
+	     
+	     CPageBoard pageboard = commentService.list(request_Page, Integer.parseInt(pidx));
+	     
+	     if(boardnumber == 1) {
+	        board = debateService.select(Integer.parseInt(pidx), boardnumber);
+	        mv.addObject("section", "/debateboard/read.jsp");
+	     } else {
+	        board = freeService.select(Integer.parseInt(pidx), boardnumber);  
+	        mv.addObject("section", "/freeboard/read.jsp");
+	     }
+	     
+	     mv.addObject("board", board);
+	     mv.addObject("cboard", pageboard);
+	     mv.addObject("requestPage", request_Page);
+	     mv.setViewName("/WEB-INF/index.jsp");
+	     return mv;
+	  }
 }

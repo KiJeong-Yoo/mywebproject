@@ -21,7 +21,7 @@ public class BoardDAO implements DebateInter, FreeInter {
 	
 	public BoardDAO() {}
 	
-	// 글 입력
+	// 게시글 입력, 게시판 번호로 구분
 	public int insert(BoardVO board) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -225,6 +225,7 @@ public class BoardDAO implements DebateInter, FreeInter {
 		String sql = "select * from board where idx=? and boardid=?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		try{
 			pstmt = ds.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, idx);

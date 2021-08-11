@@ -88,7 +88,7 @@
 							<div class="form-group">
 								<form action="/comment/creply" method="post" onsubmit="return check2()">
 									<div class="col-xs-6">
-										<input class="form-control" type="text" name="commentreply">
+										<input class="form-control comment1" type="text" name="commentreply">
 									</div>
 									<div class="col-xs-2">						
 										<input class="form-control" type="submit" value="입력">
@@ -105,14 +105,15 @@
 							</div>
 						</td>
 						<td><a id="${status.index}" class="on">답글쓰기</a></td>
+						<!-- 댓글 수정 -->
 						<td>					
 							<a class="on2"  id="re_${status.index}">댓글 수정</a>
 						</td>
 						<td id="${status.index}" class="comment_reply_div_re_${status.index}" style="display: none;">
 							<div class="form-group">
-								<form action="/comment/cupdate.do" method="post" onsubmit="return check2()">
+								<form action="/comment/cupdate.do" method="post" onsubmit="return check3()">
 									<div class="col-xs-6">
-										<input class="form-control" type="text" name="commentreply">
+										<input class="form-control comment2" type="text" name="commentreply1">
 									</div>
 									<div class="col-xs-2">						
 										<input class="form-control" type="submit" value="입력">
@@ -158,7 +159,8 @@
 </div>
 <script>
 let content = document.getElementById("c_content");
-let creply = document.getElementsByName("commentreply");
+let creply1 = document.getElementsByName("commentreply");
+let creply2 = document.getElementsByName("commentreply1");
 
 function check() {
 	if(content.value == '') {
@@ -169,7 +171,15 @@ function check() {
 }
 
 function check2() {
-	if(creply.value == '') {
+	if(creply1.value == '') {
+		alert("댓글을 입력해주세요.");
+		return false;
+	}
+	return true;
+}
+
+function check3() {
+	if(creply2.value == '') {
 		alert("댓글을 입력해주세요.");
 		return false;
 	}
