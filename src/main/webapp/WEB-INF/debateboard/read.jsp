@@ -186,19 +186,36 @@ function check3() {
 	return true;
 }
 
+let onCount = 0;
+//댓글 입력 클릭 시 display 변경
 $(function() {
 	$('.on').click(function() {
 		
 		let id = $(this).attr('id');
-		$('.comment_reply_div_' + id).css('display', '' );		 
+		
+		if(onCount == 0) {
+			$('.comment_reply_div_' + id).css('display', '');
+			onCount = 1;
+		} else {
+			$('.comment_reply_div_' + id).css('display', 'none');
+			onCount = 0;
+		}
 	})
 });
 
+let onCount2 = 0;
+//대댓글 입력 클릭 시 display 변경
 $(function() {
 	$('.on2').click(function() {
 		
 		let id = $(this).attr('id');
-		$('.comment_reply_div_' + id).css('display', '' );		 
+		if(onCount2 == 0) {
+			$('.comment_reply_div_' + id).css('display', '' );		 
+			onCount2 = 1;
+		} else {
+			$('.comment_reply_div_' + id).css('display', 'none' );
+			onCount2 = 0;
+		}
 	})
 });
 </script>
